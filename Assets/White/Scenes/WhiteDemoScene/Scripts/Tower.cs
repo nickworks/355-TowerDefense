@@ -8,6 +8,8 @@ namespace White
     {
         List<EnemyController> enemies = new List<EnemyController>();
 
+        public Projectile prefabProjectile;
+
         void Start()
         {
 
