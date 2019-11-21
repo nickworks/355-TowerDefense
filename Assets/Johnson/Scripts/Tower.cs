@@ -18,7 +18,7 @@ namespace Johnson
         // Update is called once per frame
         void Update()
         {
-
+            
         }
 
 
@@ -27,21 +27,24 @@ namespace Johnson
             EnemyController result = null;
             float minDis = 0;
             // find closest
-            foreach(EnemyController e in enemies)
+            
+            foreach (EnemyController e in enemies)
             {
                 float dis = (e.transform.position - transform.position).magnitude; // distance from tower to enemy
-                if(dis < minDis || result == null)
+                
+                if (dis < minDis || result == null)
                 {
                     result = e;
                     minDis = dis;
                 }
             }
-
+            
             return result;
         }
 
         EnemyController GetRandomEnemy()
         {
+            
             if (enemies.Count <= 0) return null;
             int index = Random.Range(0, enemies.Count);
             return enemies[index];

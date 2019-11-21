@@ -37,6 +37,7 @@ namespace Johnson
                     {
                         goal.TakeDamage(attackDamage);
                         timerAttackCooldown = attackCooldown;
+                        
                     }
                 }
                 else

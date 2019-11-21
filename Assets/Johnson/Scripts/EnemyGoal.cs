@@ -2,14 +2,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 namespace Johnson
 {
     public class EnemyGoal : MonoBehaviour
     {
-
-        float health = 100;
+        [HideInInspector]
+        public float health = 100;
+        public Image healthBar;
 
         public bool isDead // is a property not a field, so it wont show up in editor
         {
@@ -23,6 +25,7 @@ namespace Johnson
         void Update()
         {
             if (isDead) Explode();
+            
         }
 
         void Explode()
@@ -35,7 +38,9 @@ namespace Johnson
 
         public void TakeDamage(float amount)
         {
+            
             health -= amount;
+            healthBar.fillAmount = (health/100);
         }
     }
 }
