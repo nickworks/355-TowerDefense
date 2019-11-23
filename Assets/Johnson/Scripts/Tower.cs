@@ -8,6 +8,7 @@ namespace Johnson
     {
 
         List<EnemyController> enemies = new List<EnemyController>();
+        
 
         // Start is called before the first frame update
         void Start()
@@ -18,7 +19,7 @@ namespace Johnson
         // Update is called once per frame
         void Update()
         {
-            
+          
         }
 
 
@@ -50,6 +51,8 @@ namespace Johnson
             return enemies[index];
         }
 
+        
+
         void OnTriggerEnter(Collider collider)
         {
             EnemyController e = collider.GetComponent<EnemyController>();
@@ -57,6 +60,7 @@ namespace Johnson
             {
                 enemies.Add(e);
             }
+
         }
         void OnTriggerExit(Collider collider)
         {
@@ -65,6 +69,7 @@ namespace Johnson
             {
                 enemies.Remove(e);
             }
+
         }
     }
 }
