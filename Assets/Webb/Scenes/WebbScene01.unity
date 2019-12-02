@@ -153,6 +153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 608a5002d59401e4e92bfede3482650d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackCooldown: 0.5
+  attackDamge: 25
 --- !u!195 &934910928
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -243,7 +245,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 934910926}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7, y: 2.04, z: 0.73}
+  m_LocalPosition: {x: -9.99, y: 2.04, z: 7.93}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -374,6 +376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bfc1a9ccbccf0a4bb1af0056f8d64f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
 --- !u!135 &1563790254
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -575,7 +578,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddda0652d8e889e41b617693c018b1b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerPrefab: {fileID: 6341308841713783301, guid: 274ed30d820a55747b41179b48892acb,
+  towerPrefab: {fileID: 8975707709785486212, guid: cd8edebd89a668145b202763400b1d08,
     type: 3}
 --- !u!1 &1839222760
 GameObject:
