@@ -8,7 +8,8 @@ namespace Webb
     public class EnemyController : MonoBehaviour
     {
 public float attackCooldown = 0.5f;
-        public float attackDamge = 25;
+        public float attackDamge = 1;
+        public ParticleSystem coins;
         NavMeshAgent agent;
         EnemyGoal goal;
         bool isAttackState;
@@ -17,7 +18,7 @@ public float attackCooldown = 0.5f;
         void Start()
         {
             agent = GetComponent<NavMeshAgent>();
-
+            coins.Stop();
            
         }
 
@@ -29,14 +30,18 @@ public float attackCooldown = 0.5f;
             {
                 if (goal)
                 {
-                    if(timerAttackCooldown <=0)
+                    if(timerAttackCooldown <= 0)
                     goal.TakeDamge(attackDamge);
+                   // timerAttackCooldown = attackCooldown;
                 }
                 else
                 {
                     isAttackState = false;
                 }
 
+            }
+            if (goal) {
+                agent.destination = goal.transform.position;
             }
             else
             {
@@ -66,10 +71,11 @@ public float attackCooldown = 0.5f;
                 }
             }
         }
-        void OnTriggerEneter(Collider trigger)
+        void OnTriggerEnter(Collider trigger)
         {
             if(trigger.GetComponent<EnemyGoal>() != null)
             {
+              
                 isAttackState = true;
                 Tower tower = trigger.GetComponent<Tower>();
                 if(tower != null)
