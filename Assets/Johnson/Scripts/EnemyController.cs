@@ -10,7 +10,7 @@ namespace Johnson
 
         public float attackCooldown = 0.5f;
         public float attackDamage = 25;
-
+        public Camera cameraToLookAt;
 
         NavMeshAgent agent;
         EnemyGoal goal;
@@ -56,7 +56,7 @@ namespace Johnson
                 FindClosestGoal();
             }
 
-            
+            FaceCamera();
 
         }
 
@@ -94,6 +94,14 @@ namespace Johnson
             {
                 isAttackState = false;
             }
+        }
+
+        void FaceCamera()
+        {
+            Vector3 v = cameraToLookAt.transform.position - transform.position;
+            v.x = v.z = 0.0f;
+            transform.LookAt(cameraToLookAt.transform.position - v);
+            transform.Rotate(0, 180, 0);
         }
     }
 }

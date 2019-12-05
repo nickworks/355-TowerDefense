@@ -6,20 +6,27 @@ namespace Johnson
 {
     public class Tower : MonoBehaviour
     {
+        public float attackCooldown = 0.5f;
+        public float attackDamage = 25;
 
         List<EnemyController> enemies = new List<EnemyController>();
-        
+        float timerAttackCooldown = 0;
+
 
         // Start is called before the first frame update
         void Start()
         {
-
+            
         }
 
         // Update is called once per frame
         void Update()
         {
-          
+
+            if (timerAttackCooldown > 0) timerAttackCooldown -= Time.deltaTime;
+
+
+
         }
 
 
@@ -37,11 +44,15 @@ namespace Johnson
                 {
                     result = e;
                     minDis = dis;
+                   
+
                 }
             }
             
             return result;
         }
+
+
 
         EnemyController GetRandomEnemy()
         {
@@ -52,6 +63,8 @@ namespace Johnson
         }
 
         
+
+    
 
         void OnTriggerEnter(Collider collider)
         {
@@ -71,5 +84,11 @@ namespace Johnson
             }
 
         }
-    }
-}
+
+        public void ShootProjectile()
+        {
+
+        }
+
+    } // end class
+}// end namespace

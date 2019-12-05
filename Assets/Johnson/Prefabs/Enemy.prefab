@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 3531804619226587329}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -133,8 +133,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackCooldown: 0.5
   attackDamage: 25
-  healthBar: {fileID: 158203527448091687}
-  health: 1
+  cameraToLookAt: {fileID: 8570809972689398005, guid: 641b88f5872a866418477b39dc8bd88b,
+    type: 3}
 --- !u!54 &3531804619226587329
 Rigidbody:
   m_ObjectHideFlags: 0
