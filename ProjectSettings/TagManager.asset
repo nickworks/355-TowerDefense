@@ -8,6 +8,7 @@ TagManager:
   - Pinball
   - Return
   - Enemy
+  - Bullet
   layers:
   - Default
   - TransparentFX
