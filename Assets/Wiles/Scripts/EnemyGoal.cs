@@ -8,10 +8,15 @@ namespace Wiles
 {
     public class EnemyGoal : MonoBehaviour
     {
+        public float health = 3327;
+        public float attackRange = 7.5f;
+        public float attackSpeed = 1;
+        public float attackDamage = 74;
 
         public Image healthBar;
 
-        float health = 100;
+        float maxHealth;
+
         public bool isDead
         {
             get
@@ -23,13 +28,13 @@ namespace Wiles
         // Start is called before the first frame update
         void Start()
         {
-
+            maxHealth = health;
         }
 
         // Update is called once per frame
         void Update()
         {
-            if (healthBar) healthBar.fillAmount = health / 100;
+            if (healthBar) healthBar.fillAmount = health / maxHealth;
 
             if (isDead) Explode();
         }

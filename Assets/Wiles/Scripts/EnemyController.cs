@@ -7,16 +7,25 @@ namespace Wiles
 {
     public class EnemyController : MonoBehaviour
     {
-
-        public float attackCooldown = 0.5f;
+        public float health = 250;
         public float attackDamage = 25;
+        public float attackRange = 0;
+        public float attackCooldown = 0.5f;
+        public float speed = 2.5f;
+
 
         NavMeshAgent agent;
         EnemyGoal goal;
         bool isAttackState = false;
         private float timerAttackCooldown = 0;
 
-
+        public bool isDead
+        {
+            get
+            {
+                return (health <= 0);
+            }
+        }
         // Start is called before the first frame update
         void Start()
         {
@@ -29,6 +38,8 @@ namespace Wiles
         // Update is called once per frame
         void Update()
         {
+
+            if (isDead) Explode();
 
             if (timerAttackCooldown > 0) timerAttackCooldown -= Time.deltaTime;
 
@@ -58,6 +69,14 @@ namespace Wiles
                 FindClosestGoal();
 
             }
+        }
+
+        private void Explode()
+        {
+            print("ENEMY BOOM");
+            // TODO: spawn particles
+            // TODO: play audio
+            Destroy(gameObject);
         }
 
         void FindClosestGoal()
@@ -103,6 +122,10 @@ namespace Wiles
                 isAttackState = false;
             }
 
+        }
+        public void TakeDamage(float amount)
+        {
+            health -= amount;
         }
     }
 }

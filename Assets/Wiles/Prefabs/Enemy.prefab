@@ -130,8 +130,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4dc686ce83c5e84fba05a5b13439d84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackCooldown: 0.5
+  health: 250
   attackDamage: 10
+  attackRange: 0
+  attackCooldown: 0.5
+  speed: 2.5
 --- !u!54 &1481421246339210694
 Rigidbody:
   m_ObjectHideFlags: 0

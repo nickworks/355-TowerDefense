@@ -6,23 +6,72 @@ namespace Wiles
 {
     public class Tower : MonoBehaviour
     {
+        public float health = 1996;
+        public float attackRange = 8;
+        public float attackSpeed = 0.8f;
+        public float attackDamage = 77;
+
+        bool isFrozen = false;
+        float freezeDuration = 4;
 
         List<EnemyController> enemies = new List<EnemyController>();
+        float atkTimer = 0;
+        float frozenTimer = 0;
 
+        MeshRenderer mesh;
+        Material defMat;
+        public Material frozenMat;
+
+        public bool isDead
+        {
+            get
+            {
+                return (health <= 0);
+            }
+        }
         // Start is called before the first frame update
         void Start()
         {
-
+            mesh = GetComponent<MeshRenderer>();
+            defMat = mesh.materials[0];
         }
 
         // Update is called once per frame
         void Update()
         {
+            if (isDead) Explode();
 
+            if (isFrozen)
+            {
+                mesh.materials[0] = frozenMat;
+                frozenTimer += Time.deltaTime;
+                if (frozenTimer >= freezeDuration)
+                {
+                    mesh.materials[0] = defMat;
+                    isFrozen = false;
+                    frozenTimer = 0;
+                }
+                return;
+            }
 
+            atkTimer += Time.deltaTime;
+            if (atkTimer >= attackSpeed)
+            {
+                atkTimer = 0;
+                Attack(GetClosestEnemy());
+            }
 
         }
+        public void Freeze(float duration)
+        {
+            isFrozen = true;
+            freezeDuration = duration;
+        }
 
+        void Attack(EnemyController target)
+        {
+            target.TakeDamage(attackDamage);
+        }
 
         EnemyController GetClosestEnemy()
         {
@@ -64,6 +113,17 @@ namespace Wiles
             if (e != null) enemies.Remove(e);
 
 
+        }
+        public void TakeDamage(float amount)
+        {
+            health -= amount;
+        }
+        private void Explode()
+        {
+            print("ENEMY BOOM");
+            // TODO: spawn particles
+            // TODO: play audio
+            Destroy(gameObject);
         }
     }
 }
