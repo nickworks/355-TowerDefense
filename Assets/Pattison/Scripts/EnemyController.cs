@@ -12,6 +12,8 @@ namespace Pattison
         public float attackDamage = 25;
 
         NavMeshAgent agent;
+        LineRenderer line;
+
         EnemyGoal goal;
         bool isAttackState = false;
         float timerAttackCooldown = 0;
@@ -20,7 +22,7 @@ namespace Pattison
         void Start() {
 
             agent = GetComponent<NavMeshAgent>();
-
+            line = GetComponent<LineRenderer>();
 
         }
 
@@ -45,6 +47,13 @@ namespace Pattison
 
             if (goal) {
                 agent.destination = goal.transform.position;
+
+                Vector3[] points = agent.path.corners;
+                line.positionCount = points.Length;
+
+                line.SetPositions(points);
+
+
             } else {
                 FindClosestGoal();
             }
