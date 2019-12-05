@@ -25,7 +25,9 @@ namespace Webb {
         void Update()
         {
       GetClosetEnemy();
-            
+            RemoveNullEnemies();
+
+
 
         }
            EnemyController GetClosetEnemy()
@@ -36,6 +38,7 @@ namespace Webb {
 
                 foreach(EnemyController e in enemies)
                 {
+                if (e == null) continue;
                     float dis = (e.transform.position - transform.position).magnitude;
                     if(dis < minDis || result == null)
                     {
@@ -53,6 +56,13 @@ namespace Webb {
                 }
                 return result;
             }  
+        public void RemoveNullEnemies()
+        {
+            for (int i = enemies.Count - 1; i >= 0; i--)
+            {
+                if (enemies[i] == null) enemies.RemoveAt(i);
+            }
+        }
             EnemyController GetRandomEnemy()
             {
                 if (enemies.Count <= 0) return null;

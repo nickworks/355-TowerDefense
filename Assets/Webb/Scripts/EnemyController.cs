@@ -43,7 +43,7 @@ public float attackCooldown = 0.5f;
 
             }
             if (goal) {
-                agent.destination = goal.transform.position;
+              if(agent.isOnNavMesh)  agent.destination = goal.transform.position;
             }
             else
             {
@@ -52,7 +52,7 @@ public float attackCooldown = 0.5f;
         }
 
         private void FindClosestGoal()
-        {
+        {    float minDis = 0;
             if (goal)
             {
                 agent.destination = goal.transform.position;
@@ -62,7 +62,7 @@ public float attackCooldown = 0.5f;
                 EnemyGoal[] goals = GameObject.FindObjectsOfType<EnemyGoal>();
                 foreach (EnemyGoal g in goals)
                 {
-                    float minDis = 0;
+                    
                     float dis = (g.transform.position - transform.position).magnitude;// distance to EnemyGoal g
                     if (dis < minDis || goal == null)
                     {
