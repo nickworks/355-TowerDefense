@@ -12,6 +12,7 @@ public float attackCooldown = 0.5f;
         public ParticleSystem coins;
         NavMeshAgent agent;
         EnemyGoal goal;
+        int health = 10;
         bool isAttackState;
         
         float timerAttackCooldown = 0;
@@ -25,6 +26,7 @@ public float attackCooldown = 0.5f;
         // Update is called once per frame
         void Update()
         {
+            if (health <= 0) Destroy(gameObject);
             if (timerAttackCooldown > 0) timerAttackCooldown -= Time.deltaTime;
             if (isAttackState)
             {
@@ -72,7 +74,12 @@ public float attackCooldown = 0.5f;
             }
         }
         void OnTriggerEnter(Collider trigger)
-        {
+        { 
+            if (trigger.transform.tag == "Bullet")
+                {
+                    print("Oh shit ive been hit");
+                health -= 2;
+                }
             if(trigger.GetComponent<EnemyGoal>() != null)
             {
               
@@ -82,7 +89,7 @@ public float attackCooldown = 0.5f;
                 {
                     print("enemy close to tower");
                 }
-
+               
             }
         }
         void OnTriggerExit(Collider trigger)

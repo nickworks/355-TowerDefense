@@ -792,6 +792,7 @@ GameObject:
   - component: {fileID: 7516249914819357411}
   - component: {fileID: -5159694846589546799}
   - component: {fileID: 5520476174340895738}
+  - component: {fileID: 9195984838562555625}
   m_Layer: 0
   m_Name: tenticale tower_4
   m_TagString: Untagged
@@ -865,3 +866,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a75e184b2092ba741b3377dc788138e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefabDarkPostion: {fileID: 843301490119646276, guid: 1e2d44e93f8f41d429ae6cac73e14852,
+    type: 3}
+--- !u!135 &9195984838562555625
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8975707709785486212}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 10
+  m_Center: {x: 0, y: 0, z: -1.5}

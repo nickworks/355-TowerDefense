@@ -7,6 +7,8 @@ TagManager:
   - Plunger
   - Pinball
   - Return
+  - Enemy
+  - Bullet
   layers:
   - Default
   - TransparentFX
