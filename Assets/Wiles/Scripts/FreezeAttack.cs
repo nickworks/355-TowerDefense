@@ -64,6 +64,7 @@ namespace Wiles
 
             if (atkTimer >= cooldownTime)
             {
+                print("TIME TO FREEZE!");
                 atkTimer = cooldownTime;
                 if (isPlayerFirendly)
                 {

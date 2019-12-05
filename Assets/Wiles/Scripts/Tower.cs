@@ -80,6 +80,7 @@ namespace Wiles
             // find closest
             foreach(EnemyController e in enemies)
             {
+                if (e == null) continue; //if this e enemy has already been destroyed but somehow not removed, ignore it.
                 float dis = (e.transform.position - transform.position).magnitude; // distance from tower to enemy
                 if(dis < minDis || result == null)
                 {

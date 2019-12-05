@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 namespace Wiles
 {
@@ -13,11 +14,13 @@ namespace Wiles
         public float attackCooldown = 0.5f;
         public float speed = 2.5f;
 
+        public Image healthBar;
 
         NavMeshAgent agent;
         EnemyGoal goal;
         bool isAttackState = false;
         private float timerAttackCooldown = 0;
+        float maxHealth;
 
         public bool isDead
         {
@@ -31,13 +34,14 @@ namespace Wiles
         {
 
             agent = GetComponent<NavMeshAgent>();
-
+            maxHealth = health;
 
         }
 
         // Update is called once per frame
         void Update()
         {
+            if (healthBar) healthBar.fillAmount = health / maxHealth;
 
             if (isDead) Explode();
 

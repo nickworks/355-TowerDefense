@@ -140,3 +140,4 @@ MonoBehaviour:
   attackRange: 8
   attackSpeed: 0.8
   attackDamage: 77
+  frozenMat: {fileID: 2100000, guid: ce836e437de187647829f9d1ea434bbd, type: 2}
