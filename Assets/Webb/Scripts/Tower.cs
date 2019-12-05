@@ -20,7 +20,14 @@ namespace Webb {
              spawnPos = gameObject.transform.position + spawnPosYIncrease;
 
         }
-
+        public void StartSelect()
+        {
+            GetComponent<MeshRenderer>().material.color = Color.white;
+        }
+        public void EndSelect()
+        {
+            GetComponent<MeshRenderer>().material.color = Color.white;
+        }
         // Update is called once per frame
         void Update()
         {

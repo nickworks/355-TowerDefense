@@ -793,7 +793,7 @@ GameObject:
   - component: {fileID: -5159694846589546799}
   - component: {fileID: 5520476174340895738}
   - component: {fileID: 9195984838562555625}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: tenticale tower_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -868,6 +868,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabDarkPostion: {fileID: 843301490119646276, guid: 1e2d44e93f8f41d429ae6cac73e14852,
     type: 3}
+  coolDown: 0.5
 --- !u!135 &9195984838562555625
 SphereCollider:
   m_ObjectHideFlags: 0

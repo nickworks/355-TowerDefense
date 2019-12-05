@@ -11,6 +11,7 @@ public float attackCooldown = 0.5f;
         public float attackDamge = 1;
         public ParticleSystem coins;
         NavMeshAgent agent;
+        LineRenderer line;
         EnemyGoal goal;
         int health = 10;
         bool isAttackState;
@@ -19,6 +20,7 @@ public float attackCooldown = 0.5f;
         void Start()
         {
             agent = GetComponent<NavMeshAgent>();
+            line = GetComponent<LineRenderer>();
             coins.Stop();
            
         }
@@ -44,6 +46,11 @@ public float attackCooldown = 0.5f;
             }
             if (goal) {
               if(agent.isOnNavMesh)  agent.destination = goal.transform.position;
+                Vector3[] points = agent.path.corners;
+                line.postuionCount = points.l
+                line.SetPositions();
+                
+             
             }
             else
             {
