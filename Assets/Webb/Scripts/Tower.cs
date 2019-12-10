@@ -6,6 +6,8 @@ namespace Webb {
     {
 
         public GameObject prefabDarkPostion;
+        public Material tower;
+        public Material clicked;
         Vector3 spawnPos;
         Vector3 spawnPosYIncrease;
         float timer;
@@ -22,17 +24,18 @@ namespace Webb {
         }
         public void StartSelect()
         {
-            GetComponent<MeshRenderer>().material.color = Color.white;
+            GetComponent<MeshRenderer>().material = clicked;
         }
         public void EndSelect()
         {
-            GetComponent<MeshRenderer>().material.color = Color.white;
+            GetComponent<MeshRenderer>().material = tower;
         }
         // Update is called once per frame
         void Update()
         {
-      GetClosetEnemy();
+            GetClosetEnemy();
             RemoveNullEnemies();
+          
 
 
 
@@ -53,12 +56,22 @@ namespace Webb {
                         minDis = dis; 
                     enemyPostion = (result.transform.position);
                     timer -= Time.deltaTime;
-                    if (timer <= 0)
+                    if (timer <= 0 & gameObject.transform.tag == "Dark")
+                    {
+                        Instantiate(prefabDarkPostion, spawnPos, Quaternion.identity);
+                        print("help");
+                        timer = coolDown;
+                    }
+                    if (timer <= 0 & gameObject.transform.tag == "Light")
                     {
                         Instantiate(prefabDarkPostion, spawnPos, Quaternion.identity);
                         timer = coolDown;
                     }
-                  
+                    if (timer <= 0 & gameObject.transform.tag == "Nature")
+                    {
+                        Instantiate(prefabDarkPostion, spawnPos, Quaternion.identity);
+                        timer = coolDown;
+                    }
                 }
                 }
                 return result;

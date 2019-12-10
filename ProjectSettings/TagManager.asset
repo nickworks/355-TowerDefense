@@ -9,6 +9,9 @@ TagManager:
   - Return
   - Enemy
   - Bullet
+  - Dark
+  - Light
+  - Nature
   layers:
   - Default
   - TransparentFX

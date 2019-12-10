@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 namespace Webb
 {
@@ -13,7 +14,8 @@ public float attackCooldown = 0.5f;
         NavMeshAgent agent;
         LineRenderer line;
         EnemyGoal goal;
-        int health = 10;
+        public Image healthBar;
+        int health = 100;
         bool isAttackState;
         
         float timerAttackCooldown = 0;
@@ -28,6 +30,10 @@ public float attackCooldown = 0.5f;
         // Update is called once per frame
         void Update()
         {
+
+            print(health);
+                healthBar.fillAmount = health / 100;
+            timerAttackCooldown -= Time.deltaTime;
             if (health <= 0) Destroy(gameObject);
             if (timerAttackCooldown > 0) timerAttackCooldown -= Time.deltaTime;
             if (isAttackState)
@@ -36,7 +42,7 @@ public float attackCooldown = 0.5f;
                 {
                     if(timerAttackCooldown <= 0)
                     goal.TakeDamge(attackDamge);
-                   // timerAttackCooldown = attackCooldown;
+                 //timerAttackCooldown = attackCooldown;
                 }
                 else
                 {
@@ -47,8 +53,8 @@ public float attackCooldown = 0.5f;
             if (goal) {
               if(agent.isOnNavMesh)  agent.destination = goal.transform.position;
                 Vector3[] points = agent.path.corners;
-                line.postuionCount = points.l
-                line.SetPositions();
+               // line.postuionCount = points.l
+               // line.SetPositions();
                 
              
             }
@@ -85,9 +91,20 @@ public float attackCooldown = 0.5f;
             if (trigger.transform.tag == "Bullet")
                 {
                     print("Oh shit ive been hit");
-                health -= 2;
+                health -= 5;
+                GetComponent<NavMeshAgent>().speed = 1;
                 }
-            if(trigger.GetComponent<EnemyGoal>() != null)
+            if (trigger.transform.tag == "AreaAffectBullet")
+            {
+                print("Oh shit ive been hit");
+                health -= 10;
+            }
+            if (trigger.transform.tag == "Freeze")
+            {
+                print("Oh shit ive been hit");
+                health -= 20;
+            }
+            if (trigger.GetComponent<EnemyGoal>() != null)
             {
               
                 isAttackState = true;

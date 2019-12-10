@@ -5,6 +5,7 @@ namespace Webb
 {
     public class ClickToSpawnTower : MonoBehaviour
     {
+        public bool buildDarkTower;
         struct GridCoords
         {
             public int x;
@@ -21,16 +22,27 @@ namespace Webb
         public Vector2 gridOffset = Vector2.zero;
         public int towerCols = 4;
         public int towerRows = 4;
-        public float gridSize = 1.5f;
+        public float gridSize = 1.25f;
         public Transform gridHelper;
-
+        public LayerMask objectsThatSupportTowers;
+        public LayerMask clickableObjects;
         Tower[,] towers;
-        Tower currentlySelectedTower;
+       
         Camera cam;
         public Tower towerPrefab;
-               public LayerMask objectsThatSupportTowers;
-        public LayerMask clickAbleObjects;
+               
         private float gridX;
+        static Tower _currentlySelectedTower;
+         static public Tower currentlySelectedTower
+        {
+            get { return _currentlySelectedTower; }
+            set
+            {
+                if (_currentlySelectedTower != null) _currentlySelectedTower.EndSelect();
+                _currentlySelectedTower = value;
+                if (_currentlySelectedTower != null) _currentlySelectedTower.StartSelect();
+            }
+        }
 
         // Start is called before the first frame update
         void Start()
@@ -43,18 +55,31 @@ namespace Webb
         void Update()
         {
             SetHelperToMouse();
-            SpawnTowerOnRightClick(); if (Input.GetButtonDown("Fire1"))
-            {
-                Ray ray = cam.ScreenPointToRay(Input.mousePosition); // creat a ray from the camera through
-                if (Physics.Raycast(ray, out RaycastHit hit, 50, clickAbleObjects))
-                { // 
-                   Tower tower = hit.collider.GetComponent<Tower>();
-                    if(tower != null)
+            SpawnTowerOnRightClick();
+            ClickedTower();
+        }
+
+       public void ClickedTower()
+        {
+            if (Input.GetButtonDown("Fire1"))
+            { // on left click:
+                Ray ray = cam.ScreenPointToRay(Input.mousePosition); // create a ray from the camera, through the mouse
+
+                if (Physics.Raycast(ray, out RaycastHit hit, 50, clickableObjects))
+                { // shoot ray into scene, detect hit
+
+                    Tower tower = hit.collider.GetComponent<Tower>();
+                    if (tower != null)
                     {
+                        
                         currentlySelectedTower = tower;
+                   
                     }
+
+
+
                 }
-                }
+            }
         }
 
         private void SpawnTowerOnRightClick()
@@ -67,13 +92,20 @@ namespace Webb
                     Tower exstingTower = LookUpTower(grid);
                     if (exstingTower == null)
                     {
-                        Tower tower = Instantiate(towerPrefab, gridHelper.position, Quaternion.identity);
-                        towers[grid.x, grid.y] = tower;
+                        if (buildDarkTower == true)
+                        {
+                            Tower tower = Instantiate(towerPrefab, gridHelper.position, Quaternion.identity);
+
+                            towers[grid.x, grid.y] = tower;
+                        }
                     }
                 }
             }
         }
-
+        public void SpawnDarkTower()
+        {
+            buildDarkTower = true;
+        }
         private bool IsValidGridCoords(GridCoords grid)
         {
              if (grid.x < 0) return false;
