@@ -87,7 +87,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8739020905909216616}
-  - component: {fileID: 3717511704734537431}
+  - component: {fileID: 6184475350950181732}
   m_Layer: 9
   m_Name: GameObject
   m_TagString: Untagged
@@ -109,8 +109,8 @@ Transform:
   m_Father: {fileID: 5389479735370269079}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &3717511704734537431
-SphereCollider:
+--- !u!65 &6184475350950181732
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -120,8 +120,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 6.97
-  m_Center: {x: 0, y: 0, z: -1.5}
+  m_Size: {x: 30, y: 5, z: 30}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8975707709785486212
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,13 +131,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5389479735370269079}
-  - component: {fileID: 7516249914819357411}
   - component: {fileID: -5159694846589546799}
   - component: {fileID: 8802057129658221460}
   - component: {fileID: 7719539991322279276}
   - component: {fileID: 5520476174340895738}
-  - component: {fileID: 6842698863817268758}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: tenticale tower_4
   m_TagString: Dark
   m_Icon: {fileID: 0}
@@ -160,20 +158,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &7516249914819357411
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8975707709785486212}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 6980488992110275754, guid: ac040497b81141c40a0e934cc8373923, type: 3}
 --- !u!208 &-5159694846589546799
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -253,16 +237,3 @@ MonoBehaviour:
   tower: {fileID: 2100000, guid: 173e1ec2cef29fa4684db0bb28ba7265, type: 2}
   clicked: {fileID: 2100000, guid: ee4e82110a4a9584aa5d7b4b71d174d5, type: 2}
   coolDown: 0.5
---- !u!135 &6842698863817268758
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8975707709785486212}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 6.97
-  m_Center: {x: 0, y: 0, z: -1.5}

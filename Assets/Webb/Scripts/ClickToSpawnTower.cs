@@ -68,7 +68,7 @@ namespace Webb
                 if (Physics.Raycast(ray, out RaycastHit hit, 50, clickableObjects))
                 { // shoot ray into scene, detect hit
 
-                    Tower tower = hit.collider.GetComponent<Tower>();
+                    Tower tower = hit.collider.GetComponentInParent<Tower>();
                     if (tower != null)
                     {
                         
@@ -94,7 +94,7 @@ namespace Webb
                     {
                         if (buildDarkTower == true)
                         {
-                            Tower tower = Instantiate(towerPrefab, gridHelper.position, Quaternion.identity);
+                            Tower tower = Instantiate(towerPrefab, gridHelper.position, Quaternion.identity); 
 
                             towers[grid.x, grid.y] = tower;
                         }

@@ -13,7 +13,7 @@ namespace Webb {
         float timer;
         public float coolDown = .5f;
         
-        List<EnemyController> enemies = new List<EnemyController>();
+        List<EnemyController1> enemies = new List<EnemyController1>();
         public static Vector3 enemyPostion;
         // Start is called before the first frame update
         void Start()
@@ -40,13 +40,13 @@ namespace Webb {
 
 
         }
-           EnemyController GetClosetEnemy()
+           EnemyController1 GetClosetEnemy()
             {
-               EnemyController result = null;
+               EnemyController1 result = null;
                 //find ccloseset
                 float minDis = 0;
 
-                foreach(EnemyController e in enemies)
+                foreach(EnemyController1 e in enemies)
                 {
                 if (e == null) continue;
                     float dis = (e.transform.position - transform.position).magnitude;
@@ -83,7 +83,7 @@ namespace Webb {
                 if (enemies[i] == null) enemies.RemoveAt(i);
             }
         }
-            EnemyController GetRandomEnemy()
+            EnemyController1 GetRandomEnemy()
             {
                 if (enemies.Count <= 0) return null;
                 int index = Random.Range(0, enemies.Count);
@@ -91,13 +91,13 @@ namespace Webb {
             }
         void OnTriggerEnter(Collider collider)
         {
-            EnemyController  e = collider.GetComponent<EnemyController>();
+            EnemyController1  e = collider.GetComponent<EnemyController1>();
             if (e != null) enemies.Add(e);
             print("u enter");
         }
         void OnTriggerExit(Collider collider)
         {
-            EnemyController e = collider.GetComponent<EnemyController>();
+            EnemyController1 e = collider.GetComponent<EnemyController1>();
             if (e != null) enemies.Remove(e);
             print("u leave");
         }
