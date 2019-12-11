@@ -17,6 +17,7 @@ namespace Wiles
         public Image healthBar;
 
         NavMeshAgent agent;
+        LineRenderer line;
         EnemyGoal goal;
         bool isAttackState = false;
         private float timerAttackCooldown = 0;
@@ -34,6 +35,7 @@ namespace Wiles
         {
 
             agent = GetComponent<NavMeshAgent>();
+            line = GetComponent<LineRenderer>();
             maxHealth = health;
 
         }
@@ -67,7 +69,17 @@ namespace Wiles
 
             if(goal)
             {
+                //agent.ResetPath();
                 agent.destination = goal.transform.position;
+
+
+                Vector3[] points = agent.path.corners;
+
+                line.positionCount = points.Length;
+
+                line.SetPositions(points);
+
+
             } else
             {
                 FindClosestGoal();

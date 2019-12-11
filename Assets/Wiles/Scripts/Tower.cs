@@ -22,6 +22,8 @@ namespace Wiles
         Material defMat;
         public Material frozenMat;
 
+        bool cleanUpEnemyList = false;
+
         public bool isDead
         {
             get
@@ -35,11 +37,28 @@ namespace Wiles
             mesh = GetComponent<MeshRenderer>();
             defMat = mesh.materials[0];
         }
+        /// <summary>
+        /// This function cleans up our enemies array by removing "null"s
+        /// due to enemies dying while they are close to this tower.
+        /// </summary>
+        private void RemoveNullEnemies()
+        {
+            for (int i = enemies.Count - 1; i >= 0; i--)
+            {
+                if (enemies[i] == null) enemies.RemoveAt(i);
+            }
+        }
 
         // Update is called once per frame
         void Update()
         {
             if (isDead) Explode();
+
+            if(cleanUpEnemyList)
+            {
+                RemoveNullEnemies();
+                cleanUpEnemyList = false;
+            }
 
             if (isFrozen)
             {
@@ -73,6 +92,16 @@ namespace Wiles
             target.TakeDamage(attackDamage);
         }
 
+        public void StartSelect()
+        {
+            GetComponent<MeshRenderer>().material.color = Color.white;
+        }
+
+        public void EndSelect()
+        {
+            GetComponent<MeshRenderer>().material.color = Color.red;
+        }
+
         EnemyController GetClosestEnemy()
         {
             EnemyController result = null;
@@ -80,7 +109,11 @@ namespace Wiles
             // find closest
             foreach(EnemyController e in enemies)
             {
-                if (e == null) continue; //if this e enemy has already been destroyed but somehow not removed, ignore it.
+                if (e == null)
+                {
+                    cleanUpEnemyList = true;
+                    continue; //if this e enemy has already been destroyed but somehow not removed, ignore it.
+                }
                 float dis = (e.transform.position - transform.position).magnitude; // distance from tower to enemy
                 if(dis < minDis || result == null)
                 {
