@@ -32,9 +32,9 @@ namespace Pattison
         public LayerMask objectsThatSupportTowers;
         public LayerMask clickableObjects;
 
-        Tower _currentlySelectedTower;
+        static Tower _currentlySelectedTower;
 
-        public Tower currentlySelectedTower {
+        static public Tower currentlySelectedTower {
             get { return _currentlySelectedTower; }
             set {
                 if (_currentlySelectedTower != null) _currentlySelectedTower.EndSelect();
@@ -59,6 +59,10 @@ namespace Pattison
 
             SetHelperToMouse();
             SpawnTowerOnRightClick();
+            ClickToSelectItem();
+        }
+
+        private void ClickToSelectItem() {
 
             if (Input.GetButtonDown("Fire1")) { // on left click:
                 Ray ray = cam.ScreenPointToRay(Input.mousePosition); // create a ray from the camera, through the mouse
@@ -66,12 +70,12 @@ namespace Pattison
                 if (Physics.Raycast(ray, out RaycastHit hit, 50, clickableObjects)) { // shoot ray into scene, detect hit
 
                     Tower tower = hit.collider.GetComponent<Tower>();
-                    if(tower != null) {
+                    if (tower != null) {
                         currentlySelectedTower = tower;
                     }
 
-
-
+                } else {
+                    currentlySelectedTower = null; // deselect
                 }
 
             }
