@@ -74,7 +74,7 @@ namespace Wiles
             }
 
             atkTimer += Time.deltaTime;
-            if (atkTimer >= attackSpeed)
+            if (atkTimer >= attackSpeed && GetClosestEnemy() != null)
             {
                 atkTimer = 0;
                 Attack(GetClosestEnemy());

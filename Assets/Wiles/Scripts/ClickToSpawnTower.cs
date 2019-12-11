@@ -48,6 +48,18 @@ namespace Wiles
             }
         }
 
+        Tower _currentTowerToBuy;
+        public Tower currentTowerToBuy
+        {
+            get { return _currentTowerToBuy; }
+            set
+            {
+                //if (_currentTowerToBuy != null) _currentTowerToBuy.EndSelect();
+                _currentTowerToBuy = value;
+                //if (_currentTowerToBuy != null) _currentTowerToBuy.StartSelect();
+            }
+        }
+
 
         Tower[,] towers;
 
@@ -121,10 +133,11 @@ namespace Wiles
                     {
 
                         // CHECK AI NAVIGATION PATHS
-
-                        Tower tower = Instantiate(towerPrefab, gridHelper.position, Quaternion.identity);
-                        towers[grid.x, grid.y] = tower;
-
+                        if (currentTowerToBuy != null)
+                        {
+                            Tower tower = Instantiate(currentTowerToBuy, gridHelper.position, Quaternion.identity);
+                            towers[grid.x, grid.y] = tower;
+                        }
                     }
                 }
 
