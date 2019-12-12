@@ -466,5 +466,25 @@ PrefabInstance:
       propertyPath: m_Navigation.m_Mode
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 4673009435831234731, guid: 74f6f874feb53f94fa052fd8491334e3,
+        type: 3}
+      propertyPath: m_Text
+      value: The Sad Level
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938331378873047965, guid: 74f6f874feb53f94fa052fd8491334e3,
+        type: 3}
+      propertyPath: m_Text
+      value: Awesome Level
+      objectReference: {fileID: 0}
+    - target: {fileID: 6750180102393668114, guid: 74f6f874feb53f94fa052fd8491334e3,
+        type: 3}
+      propertyPath: m_Text
+      value: Elementals TD
+      objectReference: {fileID: 0}
+    - target: {fileID: 7324646024122261099, guid: 74f6f874feb53f94fa052fd8491334e3,
+        type: 3}
+      propertyPath: m_Text
+      value: Ruby Bananas
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74f6f874feb53f94fa052fd8491334e3, type: 3}
