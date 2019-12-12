@@ -7,6 +7,7 @@ namespace White
     /// <summary>
     /// This class determines the behavior of the projectiles.
     /// </summary>
+    [RequireComponent(typeof(Rigidbody))]
     public class Projectile : MonoBehaviour
     {
         /// <summary>
@@ -45,8 +46,8 @@ namespace White
         /// <summary>
         /// This function enables the tower to shoot projectiles.
         /// </summary>
-        /// <param name="owner"></param> The tower that shot the projectile.
-        /// <param name="direction"></param> The direction that the projectile is firing in.
+        /// <param name="owner">The tower that shot the projectile.</param> 
+        /// <param name="direction">The direction that the projectile is firing in.</param>
         public void Shoot(GameObject owner, Vector3 direction)
         {
             this.owner = owner;
