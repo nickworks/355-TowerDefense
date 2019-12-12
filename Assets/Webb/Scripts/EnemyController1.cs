@@ -21,7 +21,7 @@ namespace Webb
         LineRenderer line;
        public EnemyGoal goal;   
         public Image healthBar;
-        int health = 100;
+        int health = 800;
       public  bool isAttackState;
 
         float timerAttackCooldown = 0;

@@ -59,7 +59,7 @@ MonoBehaviour:
     type: 3}
   tower: {fileID: 2100000, guid: 02375c261e8626846aee6f266fa1c367, type: 2}
   clicked: {fileID: 2100000, guid: ee4e82110a4a9584aa5d7b4b71d174d5, type: 2}
-  coolDown: 0.5
+  coolDown: 5
 --- !u!23 &923811419057685581
 MeshRenderer:
   m_ObjectHideFlags: 0

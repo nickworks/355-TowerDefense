@@ -57,22 +57,13 @@ namespace Webb
                     minDis = dis;
                     enemyPostion = (result.transform.position);
                     timer -= Time.deltaTime;
-                    if (timer <= 0 & gameObject.transform.tag == "Dark")
+                    if (timer <= 0 )
                     {
                         Instantiate(prefabDarkPostion, spawnPos, Quaternion.identity);
                         print("help");
                         timer = coolDown;
                     }
-                    if (timer <= 0 & gameObject.transform.tag == "Light")
-                    {
-                        Instantiate(prefabDarkPostion, spawnPos, Quaternion.identity);
-                        timer = coolDown;
-                    }
-                    if (timer <= 0 & gameObject.transform.tag == "Nature")
-                    {
-                        Instantiate(prefabDarkPostion, spawnPos, Quaternion.identity);
-                        timer = coolDown;
-                    }
+                   
                 }
             }
             return result;
