@@ -69,16 +69,17 @@ namespace Wiles
 
             if(goal)
             {
+                
                 //agent.ResetPath();
                 agent.destination = goal.transform.position;
 
-
+                /*
                 Vector3[] points = agent.path.corners;
 
                 line.positionCount = points.Length;
 
                 line.SetPositions(points);
-
+                */
 
             } else
             {
