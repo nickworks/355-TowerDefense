@@ -24,7 +24,7 @@ namespace White
         /// The target that the tower is currently attacking.
         /// </summary>
         public Transform attackTarget { get; private set; }
-        
+
         /// <summary>
         /// This function updates each tower spawned.
         /// </summary>
@@ -50,7 +50,7 @@ namespace White
             float minDis = 0;
 
             // find closest
-            foreach(EnemyController e in enemies)
+            foreach (EnemyController e in enemies)
             {
                 /// <summary>
                 /// The distance from the tower to the enemy.
@@ -59,9 +59,9 @@ namespace White
 
                 if (dis < minDis)
                 {
-                        result = e;
-                        minDis = dis;
-                } 
+                    result = e;
+                    minDis = dis;
+                }
 
                 ShootProjectile();
             }
@@ -81,6 +81,8 @@ namespace White
             /// The enemy to fire at.
             /// <summary>
             int index = UnityEngine.Random.Range(0, enemies.Count);
+
+            ShootProjectile();
 
             return enemies[index];
         } // ends the GetRandomEnemy() function
