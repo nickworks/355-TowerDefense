@@ -14,6 +14,7 @@ namespace Wiles
         public float attackCooldown = 0.5f;
         public float speed = 2.5f;
 
+        public Transform gui;
         public Image healthBar;
 
         NavMeshAgent agent;
@@ -38,6 +39,11 @@ namespace Wiles
             line = GetComponent<LineRenderer>();
             maxHealth = health;
 
+        }
+
+        void LateUpdate()
+        {
+            gui.rotation = Quaternion.Euler(60, 0, 0);
         }
 
         // Update is called once per frame

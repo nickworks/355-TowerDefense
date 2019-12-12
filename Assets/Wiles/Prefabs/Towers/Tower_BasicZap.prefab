@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3305554387844809695}
   - component: {fileID: 3305554387844809632}
   - component: {fileID: 3305554387844809633}
-  - component: {fileID: 3305554387844809634}
   - component: {fileID: 3305554387844809694}
   - component: {fileID: 3535951528996593798}
   - component: {fileID: 5245401221801332306}
@@ -83,19 +82,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &3305554387844809634
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3305554387844809635}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!208 &3305554387844809694
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -121,7 +107,7 @@ SphereCollider:
   m_GameObject: {fileID: 3305554387844809635}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 2.28
   m_Center: {x: 0, y: 0, z: 0}
@@ -151,7 +137,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8948042589367987990}
-  - component: {fileID: 3575221988354948352}
+  - component: {fileID: 4086941496654768454}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -173,16 +159,16 @@ Transform:
   m_Father: {fileID: 3305554387844809695}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &3575221988354948352
-SphereCollider:
+--- !u!65 &4086941496654768454
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3390845945130146819}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2.28
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}

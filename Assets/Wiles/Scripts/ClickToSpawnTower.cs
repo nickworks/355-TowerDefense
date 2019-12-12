@@ -102,7 +102,7 @@ namespace Wiles
                 if (Physics.Raycast(ray, out RaycastHit hit, 50, objectsThatSupportTowers)) // shoot ray into scene, detect hit
                 {
 
-                    Tower tower = hit.collider.GetComponent<Tower>();
+                    Tower tower = hit.collider.GetComponentInParent<Tower>();
                     if(tower != null)
                     {
                         //if (currentlySelectedTower != null) currentlySelectedTower.EndSelect();

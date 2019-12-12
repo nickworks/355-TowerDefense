@@ -4,14 +4,13 @@ using UnityEngine;
 
 namespace Wiles
 {
-    public class TowerController : MonoBehaviour
+    public class Tower : MonoBehaviour
     {
         public float health = 1996;
         public float attackRange = 8;
         public float attackSpeed = 0.8f;
         public float attackDamage = 77;
 
-        bool justFrozen = false;
         bool isFrozen = false;
         float freezeDuration = 4;
 
@@ -24,8 +23,6 @@ namespace Wiles
         public Material frozenMat;
 
         bool cleanUpEnemyList = false;
-
-        TowerState currentState;
 
         public bool isDead
         {
@@ -63,13 +60,17 @@ namespace Wiles
                 cleanUpEnemyList = false;
             }
 
-            if (currentState == null) SwitchToState(new WilesBossStateIdle());
-            if (currentState != null) SwitchToState(currentState.Update(this));
-
-            if (justFrozen)
+            if (isFrozen)
             {
-                justFrozen = false;
-                SwitchToState(new TowerStateFrozen(currentState));
+                mesh.materials[0] = frozenMat;
+                frozenTimer += Time.deltaTime;
+                if (frozenTimer >= freezeDuration)
+                {
+                    mesh.materials[0] = defMat;
+                    isFrozen = false;
+                    frozenTimer = 0;
+                }
+                return;
             }
 
             atkTimer += Time.deltaTime;
@@ -87,23 +88,10 @@ namespace Wiles
             }
 
         }
-        private void SwitchToState(TowerState newState)
-        {
-            if (newState != null)
-            {
-                if (currentState != null) currentState.OnEnd(this);
-                currentState = newState;
-                currentState.OnStart(this);
-            }
-        }
         public void Freeze(float duration)
         {
-            if (!isFrozen)
-            {
-                justFrozen = true;
-                isFrozen = true;
-                freezeDuration = duration;
-            }
+            isFrozen = true;
+            freezeDuration = duration;
         }
 
         bool Attack(EnemyController target)
