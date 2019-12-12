@@ -74,10 +74,17 @@ namespace Wiles
             }
 
             atkTimer += Time.deltaTime;
-            if (atkTimer >= attackSpeed && GetClosestEnemy() != null)
+            if (atkTimer >= attackSpeed)
             {
-                atkTimer = 0;
-                Attack(GetClosestEnemy());
+                
+                print("TIME TO ATTACK!");
+                if (Attack(GetClosestEnemy()) == true)
+                {
+                    print("target locked");
+                    //Attack(GetClosestEnemy());
+                    atkTimer = 0;
+                }
+                else print("No enemy");
             }
 
         }
@@ -87,9 +94,11 @@ namespace Wiles
             freezeDuration = duration;
         }
 
-        void Attack(EnemyController target)
+        bool Attack(EnemyController target)
         {
+            if (target == null) return false;
             target.TakeDamage(attackDamage);
+            return true;
         }
 
         public void StartSelect()

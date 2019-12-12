@@ -142,7 +142,9 @@ namespace Wiles
         }
         public void TakeDamage(float amount)
         {
+            print("TAKE A DAMAGE!");
             health -= amount;
+
         }
     }
 }
