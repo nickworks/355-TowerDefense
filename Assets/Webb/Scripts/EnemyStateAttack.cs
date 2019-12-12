@@ -3,21 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace Webb
 {
-    public class EnemyStateChase : EnemyState
+    public class EnemyStateAttack : EnemyState
     {
+        // Start is called before the first frame update
         public override EnemyState Update(EnemyController1 enemy)
         {
 
-
-            enemy.Chase();
+            enemy.Attack();
             enemy.EnemyHealth();
-            if (enemy.isAttackState == true)
+            if (enemy.isAttackState == false)
             {
-                return new EnemyStateAttack();
+                return new EnemyStateChase();
             }
 
             return null;
         }
     }
 }
-        // Start is called before the first frame update

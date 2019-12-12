@@ -120,7 +120,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 30, y: 5, z: 30}
+  m_Size: {x: 4, y: 5, z: 4}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8975707709785486212
 GameObject:
@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 8802057129658221460}
   - component: {fileID: 7719539991322279276}
   - component: {fileID: 5520476174340895738}
+  - component: {fileID: 4670873958073143665}
   m_Layer: 0
   m_Name: tenticale tower_4
   m_TagString: Dark
@@ -237,3 +238,16 @@ MonoBehaviour:
   tower: {fileID: 2100000, guid: 173e1ec2cef29fa4684db0bb28ba7265, type: 2}
   clicked: {fileID: 2100000, guid: ee4e82110a4a9584aa5d7b4b71d174d5, type: 2}
   coolDown: 0.5
+--- !u!135 &4670873958073143665
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8975707709785486212}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 10
+  m_Center: {x: 0, y: 1.7846763, z: -1.5089527}

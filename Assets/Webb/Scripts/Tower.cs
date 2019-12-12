@@ -10,7 +10,7 @@ namespace Webb {
         public Material clicked;
         Vector3 spawnPos;
         Vector3 spawnPosYIncrease;
-        float timer;
+        float timer = 0;
         public float coolDown = .5f;
         
         List<EnemyController1> enemies = new List<EnemyController1>();
@@ -60,7 +60,7 @@ namespace Webb {
                     {
                         Instantiate(prefabDarkPostion, spawnPos, Quaternion.identity);
                         print("help");
-                        timer = coolDown;
+                       // timer = coolDown;
                     }
                     if (timer <= 0 & gameObject.transform.tag == "Light")
                     {

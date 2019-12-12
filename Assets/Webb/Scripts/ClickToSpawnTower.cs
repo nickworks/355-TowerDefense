@@ -5,7 +5,11 @@ namespace Webb
 {
     public class ClickToSpawnTower : MonoBehaviour
     {
-        public bool buildDarkTower;
+
+        public bool buildDarkTower = true;
+        public bool buildNatrueTower = false;
+        public bool buildLightTower = false;
+
         struct GridCoords
         {
             public int x;
@@ -30,7 +34,9 @@ namespace Webb
        
         Camera cam;
         public Tower towerPrefab;
-               
+        public Tower towerPrefabLight;
+        public Tower towerPrefabNature;
+
         private float gridX;
         static Tower _currentlySelectedTower;
          static public Tower currentlySelectedTower
@@ -98,6 +104,18 @@ namespace Webb
 
                             towers[grid.x, grid.y] = tower;
                         }
+                        if (buildLightTower == true)
+                        {
+                            Tower tower = Instantiate(towerPrefabLight, gridHelper.position, Quaternion.identity);
+
+                            towers[grid.x, grid.y] = tower;
+                        }
+                        if (buildNatrueTower == true)
+                        {
+                            Tower tower = Instantiate(towerPrefabNature, gridHelper.position, Quaternion.identity);
+
+                            towers[grid.x, grid.y] = tower;
+                        }
                     }
                 }
             }
@@ -105,6 +123,20 @@ namespace Webb
         public void SpawnDarkTower()
         {
             buildDarkTower = true;
+            buildNatrueTower = false;
+            buildLightTower = false;
+        }
+        public void SpawnLightTower()
+        {
+            buildDarkTower = false;
+            buildNatrueTower = false;
+            buildLightTower = true;
+        }
+        public void SpawnNatrueTower()
+        {
+            buildDarkTower = false;
+            buildNatrueTower = true;
+            buildLightTower = false;
         }
         private bool IsValidGridCoords(GridCoords grid)
         {

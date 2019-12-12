@@ -15,13 +15,14 @@ namespace Webb
     {
         public float attackCooldown = 0.5f;
         public float attackDamge = 1;
+        bool slowed;
         public ParticleSystem coins;
         NavMeshAgent agent;
         LineRenderer line;
-        EnemyGoal goal;
+       public EnemyGoal goal;   
         public Image healthBar;
         int health = 100;
-        bool isAttackState;
+      public  bool isAttackState;
 
         float timerAttackCooldown = 0;
 
@@ -32,7 +33,7 @@ namespace Webb
         // Start is called before the first frame update
         void Start()
         {
-
+coins.Stop();
 
         }
 
@@ -42,7 +43,7 @@ namespace Webb
         {
             agent = GetComponent<NavMeshAgent>();
             line = GetComponent<LineRenderer>();
-            coins.Stop();
+            
             if (currentState == null) SwitchToState(new EnemyStateChase());
             if (currentState != null) SwitchToState(currentState.Update(this));
 
@@ -64,25 +65,18 @@ namespace Webb
         // Update is called once per frame
 
 
-
-        /*   healthBar.fillAmount = health / 100;
-                timerAttackCooldown -= Time.deltaTime;
-                if (health <= 0) Destroy(gameObject);
-                if (timerAttackCooldown > 0) timerAttackCooldown -= Time.deltaTime;
-                if (isAttackState)
-                {
-                    if (goal)
-                    {
-                        if (timerAttackCooldown <= 0)
+        public void EnemyHealth() {
+            healthBar.fillAmount = health / 100;
+            if (health <= 0) Destroy(gameObject); 
+                }
+            public void Attack () {
+           // timerAttackCooldown -= Time.deltaTime;  
+               // if (timerAttackCooldown > 0) timerAttackCooldown -= Time.deltaTime;
+                     //   if (timerAttackCooldown <= 0)
                             goal.TakeDamge(attackDamge);
                         //timerAttackCooldown = attackCooldown;
-                    }
-                    else
-                    {
-                        isAttackState = false;
-                    }
-
-                }*/
+                        }
+              
         public void Chase()
         {
             if (goal)
@@ -123,23 +117,28 @@ namespace Webb
                 }
             }
 
-            void OnTriggerEnter(Collider trigger)
+            
+    }
+        void OnTriggerEnter(Collider trigger)
             {
-                if (trigger.transform.tag == "Bullet")
+                if (trigger.transform.tag == "Dark")
                 {
                     print("Oh shit ive been hit");
                     health -= 5;
-                    GetComponent<NavMeshAgent>().speed = 1;
+                   
                 }
-                if (trigger.transform.tag == "AreaAffectBullet")
+                if (trigger.transform.tag == "Nature")
                 {
                     print("Oh shit ive been hit");
                     health -= 10;
                 }
-                if (trigger.transform.tag == "Freeze")
+                if (trigger.transform.tag == "Light")
                 {
                     print("Oh shit ive been hit");
-                    health -= 20;
+                    health -= 1; 
+                if (slowed == false) GetComponent<NavMeshAgent>().speed *= .1f;
+                slowed =  true;
+
                 }
                 if (trigger.GetComponent<EnemyGoal>() != null)
                 {
@@ -161,7 +160,6 @@ namespace Webb
                 }
             }
         }
-    }
 }
     
         
