@@ -29,6 +29,14 @@ namespace Johnson
 
         }
 
+        public void StartSelect()
+        {
+            GetComponent<MeshRenderer>().material.color = Color.white;
+        }
+        public void EndSelect()
+        {
+            GetComponent<MeshRenderer>().material.color = Color.red;
+        }
 
         EnemyController GetClosestEnemy()
         {

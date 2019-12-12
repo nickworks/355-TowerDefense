@@ -12,6 +12,8 @@ namespace Johnson
         public float attackDamage = 25;
         public Camera cameraToLookAt;
 
+        LineRenderer line;
+
         NavMeshAgent agent;
         EnemyGoal goal;
         bool isAttackState = false;
@@ -21,6 +23,7 @@ namespace Johnson
         void Start()
         {
             agent = GetComponent<NavMeshAgent>();
+            line = GetComponent<LineRenderer>();
         }
                 
         void Update()
@@ -50,6 +53,13 @@ namespace Johnson
             if (goal)
             {
                 agent.destination = goal.transform.position;
+
+                Vector3[] points = agent.path.corners;
+
+                line.positionCount = points.Length;
+
+                line.SetPositions(points);
+                
             }
             else
             {
