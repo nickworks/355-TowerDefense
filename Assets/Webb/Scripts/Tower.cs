@@ -1,73 +1,104 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace Webb {
+namespace Webb
+{
     public class Tower : MonoBehaviour
     {
 
         public GameObject prefabDarkPostion;
+        public Material tower;
+        public Material clicked;
         Vector3 spawnPos;
         Vector3 spawnPosYIncrease;
-        float timer;
+        float timer = 0;
         public float coolDown = .5f;
-        
-        List<EnemyController> enemies = new List<EnemyController>();
+
+        List<EnemyController1> enemies = new List<EnemyController1>();
         public static Vector3 enemyPostion;
         // Start is called before the first frame update
         void Start()
         {
             spawnPosYIncrease = new Vector3(0, 4, -1);
-             spawnPos = gameObject.transform.position + spawnPosYIncrease;
+            spawnPos = gameObject.transform.position + spawnPosYIncrease;
 
         }
-
+        public void StartSelect()
+        {
+            GetComponent<MeshRenderer>().material = clicked;
+        }
+        public void EndSelect()
+        {
+            GetComponent<MeshRenderer>().material = tower;
+        }
         // Update is called once per frame
         void Update()
         {
-      GetClosetEnemy();
-            
+            GetClosetEnemy();
+            RemoveNullEnemies();
+
+
+
 
         }
-           EnemyController GetClosetEnemy()
-            {
-               EnemyController result = null;
-                //find ccloseset
-                float minDis = 0;
+        EnemyController1 GetClosetEnemy()
+        {
+            EnemyController1 result = null;
+            //find ccloseset
+            float minDis = 0;
 
-                foreach(EnemyController e in enemies)
+            foreach (EnemyController1 e in enemies)
+            {
+                if (e == null) continue;
+                float dis = (e.transform.position - transform.position).magnitude;
+                if (dis < minDis || result == null)
                 {
-                    float dis = (e.transform.position - transform.position).magnitude;
-                    if(dis < minDis || result == null)
-                    {
-                        result = e;
-                        minDis = dis; 
+                    result = e;
+                    minDis = dis;
                     enemyPostion = (result.transform.position);
                     timer -= Time.deltaTime;
-                    if (timer <= 0)
+                    if (timer <= 0 & gameObject.transform.tag == "Dark")
+                    {
+                        Instantiate(prefabDarkPostion, spawnPos, Quaternion.identity);
+                        print("help");
+                        timer = coolDown;
+                    }
+                    if (timer <= 0 & gameObject.transform.tag == "Light")
                     {
                         Instantiate(prefabDarkPostion, spawnPos, Quaternion.identity);
                         timer = coolDown;
                     }
-                  
+                    if (timer <= 0 & gameObject.transform.tag == "Nature")
+                    {
+                        Instantiate(prefabDarkPostion, spawnPos, Quaternion.identity);
+                        timer = coolDown;
+                    }
                 }
-                }
-                return result;
-            }  
-            EnemyController GetRandomEnemy()
-            {
-                if (enemies.Count <= 0) return null;
-                int index = Random.Range(0, enemies.Count);
-                return enemies[index];
             }
+            return result;
+        }
+        public void RemoveNullEnemies()
+        {
+            for (int i = enemies.Count - 1; i >= 0; i--)
+            {
+                if (enemies[i] == null) enemies.RemoveAt(i);
+            }
+        }
+        EnemyController1 GetRandomEnemy()
+        {
+            if (enemies.Count <= 0) return null;
+            int index = Random.Range(0, enemies.Count);
+            return enemies[index];
+        }
         void OnTriggerEnter(Collider collider)
         {
-            EnemyController  e = collider.GetComponent<EnemyController>();
+            EnemyController1 e = collider.GetComponent<EnemyController1>();
             if (e != null) enemies.Add(e);
             print("u enter");
         }
         void OnTriggerExit(Collider collider)
         {
-            EnemyController e = collider.GetComponent<EnemyController>();
+            EnemyController1 e = collider.GetComponent<EnemyController1>();
             if (e != null) enemies.Remove(e);
             print("u leave");
         }
