@@ -124,19 +124,19 @@ coins.Stop();
                 if (trigger.transform.tag == "Dark")
                 {
                     print("Oh shit ive been hit");
-                    health -= 5;
+                    health -= 50;
                    
                 }
                 if (trigger.transform.tag == "Nature")
                 {
                     print("Oh shit ive been hit");
-                    health -= 10;
+                    health -= 30;
                 }
                 if (trigger.transform.tag == "Light")
                 {
                     print("Oh shit ive been hit");
                     health -= 1; 
-                if (slowed == false) GetComponent<NavMeshAgent>().speed *= .1f;
+                if (slowed == false) GetComponent<NavMeshAgent>().speed *= .8f;
                 slowed =  true;
 
                 }
