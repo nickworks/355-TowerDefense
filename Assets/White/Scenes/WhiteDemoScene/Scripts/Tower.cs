@@ -61,7 +61,9 @@ namespace White
                 {
                         result = e;
                         minDis = dis;
-                }
+                } 
+
+                ShootProjectile();
             }
 
             return result;
