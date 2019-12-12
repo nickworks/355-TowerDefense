@@ -179,8 +179,8 @@ namespace White
         /// <returns>The world-position center of the provided GridCoords.</returns>
         private Vector3 CoordsGridToWorld(GridCoords grid)
         {
-            float x = grid.x * gridSize / 2 + gridOffset.x;
-            float y = grid.y * gridSize / 2 + gridOffset.y;
+            float x = grid.x * gridSize + gridOffset.x + gridSize / 2;
+            float y = grid.y * gridSize + gridOffset.y + gridSize / 2;
             return new Vector3(x, 0, y);
         } // ends the CoordsGridToWorld
 
