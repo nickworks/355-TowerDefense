@@ -13,9 +13,9 @@ namespace Wiles
         }
 
         // Update is called once per frame
-        void Update()
+        public override TowerState Update(TowerController tower)
         {
-
+            return null;
         }
     }
 }

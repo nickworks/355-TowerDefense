@@ -13,8 +13,9 @@ namespace Wiles
         }
 
         // Update is called once per frame
-        void Update()
+        public override TowerState Update(TowerController tower)
         {
+            /*
             mesh.materials[0] = frozenMat;
             frozenTimer += Time.deltaTime;
             if (frozenTimer >= freezeDuration)
@@ -23,7 +24,10 @@ namespace Wiles
                 isFrozen = false;
                 frozenTimer = 0;
             }
-            return;
+            */
+            return null;
         }
+        
+        
     }
 }

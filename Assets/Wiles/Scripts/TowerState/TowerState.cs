@@ -16,6 +16,6 @@ namespace Wiles
         public abstract TowerState Update(TowerController tower);
 
         public virtual void OnStart(TowerController Tower) { }
-        public virtual void OnEnd(TowerBossController Tower) { }
+        public virtual void OnEnd(TowerController Tower) { }
     }
 }

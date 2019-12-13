@@ -26,6 +26,7 @@ namespace Wiles
         bool cleanUpEnemyList = false;
 
         TowerState currentState;
+        TowerState previousState;
 
         public bool isDead
         {
@@ -63,13 +64,13 @@ namespace Wiles
                 cleanUpEnemyList = false;
             }
 
-            if (currentState == null) SwitchToState(new WilesBossStateIdle());
+            if (currentState == null) SwitchToState(new TowerStateIdle());
             if (currentState != null) SwitchToState(currentState.Update(this));
 
             if (justFrozen)
             {
                 justFrozen = false;
-                SwitchToState(new TowerStateFrozen(currentState));
+                SwitchToState(new TowerStateFrozen());
             }
 
             atkTimer += Time.deltaTime;
@@ -92,6 +93,7 @@ namespace Wiles
             if (newState != null)
             {
                 if (currentState != null) currentState.OnEnd(this);
+                previousState = currentState;
                 currentState = newState;
                 currentState.OnStart(this);
             }
