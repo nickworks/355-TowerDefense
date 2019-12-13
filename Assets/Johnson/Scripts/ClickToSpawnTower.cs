@@ -30,9 +30,9 @@ namespace Johnson
 
         public LayerMask clickableObjects;
 
-        Tower _CurrentlySelectedTower;
+        static Tower _CurrentlySelectedTower;
 
-        Tower currentlySelectedTower {
+        static public Tower currentlySelectedTower {
             get { return _CurrentlySelectedTower;  }
             set
             {
@@ -59,22 +59,30 @@ namespace Johnson
         {
             SetHelperToMouse();
             SpawnTowerOnRightClick();
+            ClickToSelectTower();
 
+        }
+
+        private void ClickToSelectTower()
+        {
             if (Input.GetButtonDown("Fire1")) // on left click
             {
                 Ray ray = cam.ScreenPointToRay(Input.mousePosition); // create a ray from the camera, through scene to the mouse
                 if (Physics.Raycast(ray, out RaycastHit hit, 50, clickableObjects))
                 {// shoot ray into scene, detect where it hit
 
-                   Tower tower = hit.collider.GetComponent<Tower>();
-                    if(tower != null)
+                    Tower tower = hit.collider.GetComponent<Tower>();
+                    if (tower != null)
                     {
                         currentlySelectedTower = tower;
                     }
-                    
+
+                }
+                else
+                {
+                    currentlySelectedTower = null; // deselect
                 }
             }
-
         }
 
         private void SpawnTowerOnRightClick()
@@ -125,8 +133,8 @@ namespace Johnson
             
             Ray ray = cam.ScreenPointToRay(Input.mousePosition); // create a ray from the camera, through scene to the mouse
 
-            Debug.DrawRay(ray.origin, ray.direction);
-            if (Physics.Raycast(ray, out RaycastHit hit, 100, objectsThatSupportTowers))
+            Debug.DrawRay(ray.origin, ray.direction * 100);
+            if (Physics.Raycast(ray, out RaycastHit hit, 200, objectsThatSupportTowers))
             {// shoot ray into scene, detect where it hit
 
                 GridCoords gridPos = CoordsWorldToGrid(hit.point);
