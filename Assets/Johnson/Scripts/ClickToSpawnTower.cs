@@ -65,7 +65,7 @@ namespace Johnson
 
         private void ClickToSelectTower()
         {
-            if (Input.GetButtonDown("Fire1")) // on left click
+            if (Input.GetButtonDown("Fire1") && Input.GetButton("Jump")) // on left click + spacebar
             {
                 Ray ray = cam.ScreenPointToRay(Input.mousePosition); // create a ray from the camera, through scene to the mouse
                 if (Physics.Raycast(ray, out RaycastHit hit, 50, clickableObjects))

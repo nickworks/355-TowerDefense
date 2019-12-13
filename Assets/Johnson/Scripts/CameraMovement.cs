@@ -10,7 +10,7 @@ namespace Johnson
         public float mouseSensitivity = 1;
         public float easing = 5;
 
-        Vector3 targetPosition = Vector3.zero;
+        Vector3 targetPosition;
 
         bool isDragging = false;
         void Start()
@@ -37,10 +37,9 @@ namespace Johnson
                 float my = Input.GetAxis("Mouse Y");
 
                 targetPosition -= new Vector3(mx, 0, my) * mouseSensitivity;
-
+                transform.position = Vector3.Lerp(transform.position, targetPosition, (Time.deltaTime * easing));
             }
-            
-            transform.position = Vector3.Lerp(transform.position, targetPosition, (Time.deltaTime * easing));
+                       
         }
     }
 } 
