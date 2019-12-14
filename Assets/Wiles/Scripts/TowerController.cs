@@ -28,6 +28,10 @@ namespace Wiles
         TowerState currentState;
         public TowerState previousState;
 
+        public enum AttackType {Zap, Projectile, Ice};
+
+        public AttackType currentAttack;
+
         public bool isDead
         {
             get
@@ -93,7 +97,21 @@ namespace Wiles
             }
         }
 
-        public bool Attack(EnemyController target)
+        public bool Zap(EnemyController target)
+        {
+            if (target == null) return false;
+            target.TakeDamage(attackDamage);
+            return true;
+        }
+
+        public bool Shoot(EnemyController target)
+        {
+            if (target == null) return false;
+            target.TakeDamage(attackDamage);
+            return true;
+        }
+
+        public bool Freeze(EnemyController target)
         {
             if (target == null) return false;
             target.TakeDamage(attackDamage);

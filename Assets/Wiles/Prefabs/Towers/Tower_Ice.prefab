@@ -141,7 +141,15 @@ MonoBehaviour:
   attackRange: 8
   attackSpeed: 0.8
   attackDamage: 77
+  justFrozen: 0
+  isFrozen: 0
+  freezeDuration: 4
+  atkTimer: 0
+  frozenTimer: 0
+  mesh: {fileID: 0}
+  defMat: {fileID: 0}
   frozenMat: {fileID: 0}
+  attackType: 2
 --- !u!1 &3390845945130146819
 GameObject:
   m_ObjectHideFlags: 0
