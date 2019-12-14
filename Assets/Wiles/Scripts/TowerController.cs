@@ -15,6 +15,8 @@ namespace Wiles
         public bool isFrozen = false;
         public float freezeDuration = 4;
 
+        float freezeAtkDurration = 4;
+
         List<EnemyController> enemies = new List<EnemyController>();
         public float atkTimer = 0;
         public float frozenTimer = 0;
@@ -31,6 +33,8 @@ namespace Wiles
         public enum AttackType {Zap, Projectile, Ice};
 
         public AttackType currentAttack;
+
+        public Projectile projectile;
 
         public bool isDead
         {
@@ -107,14 +111,15 @@ namespace Wiles
         public bool Shoot(EnemyController target)
         {
             if (target == null) return false;
-            target.TakeDamage(attackDamage);
+            Instantiate(projectile, (transform.position + new Vector3(0, 1, 0)), Quaternion.identity);
+            projectile.Shoot(gameObject, target.transform.position, attackDamage);
             return true;
         }
 
         public bool Freeze(EnemyController target)
         {
             if (target == null) return false;
-            target.TakeDamage(attackDamage);
+            target.Freeze(freezeAtkDurration);
             return true;
         }
 

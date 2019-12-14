@@ -24,6 +24,10 @@ namespace Wiles
         private float timerAttackCooldown = 0;
         float maxHealth;
 
+        public bool justFrozen = false;
+        public bool isFrozen = false;
+        public float freezeDuration = 4;
+
         public bool isDead
         {
             get
@@ -91,6 +95,15 @@ namespace Wiles
             {
                 FindClosestGoal();
 
+            }
+        }
+        public void Freeze(float duration)
+        {
+            if (!isFrozen)
+            {
+                justFrozen = true;
+                isFrozen = true;
+                freezeDuration = duration;
             }
         }
 

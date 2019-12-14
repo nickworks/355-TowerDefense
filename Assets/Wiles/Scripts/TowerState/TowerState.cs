@@ -6,6 +6,9 @@ namespace Wiles
 {
     public abstract class TowerState
     {
+
+        protected enum AttackType { Zap, Projectile, Ice };
+
         // Start is called before the first frame update
         void Start()
         {

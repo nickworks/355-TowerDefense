@@ -21,7 +21,7 @@ namespace Wiles
                 switch (tower.currentAttack)
                 {
                     case TowerController.AttackType.Zap:
-                        tower.Zap(tower.GetClosestEnemy();
+                        tower.Zap(tower.GetClosestEnemy());
                         break;
                     case TowerController.AttackType.Projectile:
                         tower.Shoot(tower.GetClosestEnemy());

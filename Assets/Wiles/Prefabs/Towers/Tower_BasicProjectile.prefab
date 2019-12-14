@@ -149,7 +149,9 @@ MonoBehaviour:
   mesh: {fileID: 0}
   defMat: {fileID: 0}
   frozenMat: {fileID: 0}
-  attackType: 1
+  currentAttack: 1
+  projectile: {fileID: 7921106041305014229, guid: 1766ea72086652e47804465f714b40d5,
+    type: 3}
 --- !u!1 &3390845945130146819
 GameObject:
   m_ObjectHideFlags: 0
