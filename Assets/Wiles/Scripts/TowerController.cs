@@ -11,22 +11,22 @@ namespace Wiles
         public float attackSpeed = 0.8f;
         public float attackDamage = 77;
 
-        bool justFrozen = false;
-        bool isFrozen = false;
-        float freezeDuration = 4;
+        public bool justFrozen = false;
+        public bool isFrozen = false;
+        public float freezeDuration = 4;
 
         List<EnemyController> enemies = new List<EnemyController>();
-        float atkTimer = 0;
-        float frozenTimer = 0;
+        public float atkTimer = 0;
+        public float frozenTimer = 0;
 
-        MeshRenderer mesh;
-        Material defMat;
+        public MeshRenderer mesh;
+        public Material defMat;
         public Material frozenMat;
 
         bool cleanUpEnemyList = false;
 
         TowerState currentState;
-        TowerState previousState;
+        public TowerState previousState;
 
         public bool isDead
         {
@@ -72,21 +72,6 @@ namespace Wiles
                 justFrozen = false;
                 SwitchToState(new TowerStateFrozen());
             }
-
-            atkTimer += Time.deltaTime;
-            if (atkTimer >= attackSpeed)
-            {
-
-                print("TIME TO ATTACK!");
-                if (Attack(GetClosestEnemy()) == true)
-                {
-                    print("target locked");
-                    //Attack(GetClosestEnemy());
-                    atkTimer = 0;
-                }
-                else print("No enemy");
-            }
-
         }
         private void SwitchToState(TowerState newState)
         {
@@ -108,7 +93,7 @@ namespace Wiles
             }
         }
 
-        bool Attack(EnemyController target)
+        public bool Attack(EnemyController target)
         {
             if (target == null) return false;
             target.TakeDamage(attackDamage);
@@ -125,7 +110,7 @@ namespace Wiles
             GetComponent<MeshRenderer>().material.color = Color.red;
         }
 
-        EnemyController GetClosestEnemy()
+        public EnemyController GetClosestEnemy()
         {
             EnemyController result = null;
             float minDis = 0;

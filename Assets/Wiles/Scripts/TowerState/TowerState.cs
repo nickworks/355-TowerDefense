@@ -15,7 +15,7 @@ namespace Wiles
         // Update is called once per frame
         public abstract TowerState Update(TowerController tower);
 
-        public virtual void OnStart(TowerController Tower) { }
-        public virtual void OnEnd(TowerController Tower) { }
+        public virtual void OnStart(TowerController tower) { }
+        public virtual void OnEnd(TowerController tower) { }
     }
 }

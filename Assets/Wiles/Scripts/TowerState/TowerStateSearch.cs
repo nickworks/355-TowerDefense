@@ -15,6 +15,15 @@ namespace Wiles
         // Update is called once per frame
         public override TowerState Update(TowerController tower)
         {
+            if (tower.GetClosestEnemy() != null)
+            {
+                Debug.Log("target locked");
+                
+                tower.atkTimer = 0;
+
+                return new TowerStateAttack();
+            }
+            else Debug.Log("No enemy");
             return null;
         }
     }

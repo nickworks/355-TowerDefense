@@ -15,19 +15,27 @@ namespace Wiles
         // Update is called once per frame
         public override TowerState Update(TowerController tower)
         {
-            /*
-            mesh.materials[0] = frozenMat;
-            frozenTimer += Time.deltaTime;
-            if (frozenTimer >= freezeDuration)
+            
+            
+            tower.frozenTimer += Time.deltaTime;
+            if (tower.frozenTimer >= tower.freezeDuration)
             {
-                mesh.materials[0] = defMat;
-                isFrozen = false;
-                frozenTimer = 0;
+                tower.isFrozen = false;
+                tower.frozenTimer = 0;
+                return tower.previousState;
             }
-            */
+            
             return null;
         }
         
-        
+        public override void OnStart(TowerController tower) {
+            if(tower.frozenMat != null) tower.mesh.sharedMaterial = tower.frozenMat;
+        }
+
+        public override void OnEnd(TowerController tower)
+        {
+            if (tower.defMat != null) tower.mesh.sharedMaterial = tower.defMat;
+        }
+
     }
 }

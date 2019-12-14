@@ -15,6 +15,8 @@ namespace Wiles
         // Update is called once per frame
         public override TowerState Update(TowerController tower)
         {
+            tower.atkTimer += Time.deltaTime;
+            if (tower.atkTimer >= tower.attackSpeed) return new TowerStateSearch();
             return null;
         }
     }
