@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 6489340759035397576}
   - component: {fileID: 3531804619226587329}
   - component: {fileID: 1015359892491140701}
+  - component: {fileID: 6702153257613122978}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -128,7 +129,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2022597244271329918}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 54e8dddf6de9adb4a9da92b26a6f4b95, type: 3}
   m_Name: 
@@ -262,6 +263,26 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &6702153257613122978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2022597244271329918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04264b70237f3f748b21eae805058f51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  line: {fileID: 0}
+  agent: {fileID: 0}
+  goal: {fileID: 0}
+  health: 100
+  healthBar: {fileID: 158203527448091687}
+  attackCooldown: 0.5
+  attackDamage: 25
+  timerAttackCooldown: 0
 --- !u!1 &6539396858482543148
 GameObject:
   m_ObjectHideFlags: 0

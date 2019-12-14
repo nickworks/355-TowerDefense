@@ -10,11 +10,13 @@ namespace Johnson
     /// <summary>
     /// This class is an empty class for it to be taken over by other classes, for the state machine
     /// </summary>
-    public abstract class TowerState
+    public abstract class EnemyState
     {
-        public abstract TowerState Update(Tower tower);
 
-        public virtual void OnStart(Tower tower) { }
-        public virtual void OnEnd(Tower tower) { }
+
+        public abstract EnemyState Update(EnemyStateMachine enemy);
+
+        public virtual void OnStart(EnemyStateMachine enemy) { }
+        public virtual void OnEnd(EnemyStateMachine enemy) { }
     }
 }

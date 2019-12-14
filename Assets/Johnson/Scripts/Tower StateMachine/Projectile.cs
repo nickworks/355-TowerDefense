@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This keeps all the code within the brackets inside this johnson namespace. also other classes must be inside the same namespace to access any other classes code inside the namespace
+/// </summary>
 namespace Johnson
 {
     [RequireComponent(typeof(Rigidbody))]
@@ -10,7 +13,7 @@ namespace Johnson
         public GameObject tower;
         protected GameObject owner;
         protected Rigidbody body;
-        EnemyController enemy;
+        EnemyStateMachine enemy;
         
         public float attackDamage = 25;
 
@@ -68,10 +71,10 @@ namespace Johnson
             {
                 return;
             }
-            if (other.GetComponent<EnemyController>() != null)
+            if (other.GetComponent<EnemyStateMachine>() != null)
             {
-                enemy = other.GetComponent<EnemyController>();
-                print("hit");
+                enemy = other.GetComponent<EnemyStateMachine>();
+                //print("hit");
                 enemy.TakeDamage(attackDamage);
                 Destroy(gameObject);
             }

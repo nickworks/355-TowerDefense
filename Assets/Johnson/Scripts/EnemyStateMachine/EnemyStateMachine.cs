@@ -9,24 +9,30 @@ using UnityEngine.UI;
 /// </summary>
 namespace Johnson
 {
-    public class EnemyController : MonoBehaviour
+    /// <summary>
+    /// The Enemies State Machine
+    /// </summary>
+    public class EnemyStateMachine : MonoBehaviour
     {
 
-        public float attackCooldown = 0.5f;
-        public float attackDamage = 25;
+        EnemyState currentState;
+        [HideInInspector]
+        public LineRenderer line;
+        [HideInInspector]
+        public NavMeshAgent agent;
+        [HideInInspector]
+        public EnemyGoal goal;
+
         [HideInInspector]
         public float health = 100;
         public Image healthBar;
 
-        LineRenderer line;
+        public float attackCooldown = 0.5f;
+        public float attackDamage = 25;
+        [HideInInspector]
+        public float timerAttackCooldown = 0;
 
-        NavMeshAgent agent;
-        EnemyGoal goal;
         bool isAttackState = false;
-        float timerAttackCooldown = 0;
-
-        EnemyState currentState;
-
         public bool isDead // is a property not a field, so it wont show up in editor
         {
             get
@@ -41,54 +47,61 @@ namespace Johnson
             agent = GetComponent<NavMeshAgent>();
             line = GetComponent<LineRenderer>();
         }
-                
+
+        // Update is called once per frame
         void Update()
         {
-
             if (timerAttackCooldown > 0) timerAttackCooldown -= Time.deltaTime;
 
-            if (isAttackState)
+            if (currentState == null) SwitchToState(new EnemyStateIdle());
+
+            if (currentState != null) SwitchToState(currentState.Update(this));
+
+            if (isDead)
             {
-
-                if (goal)
-                {
-                    if(timerAttackCooldown <= 0)
-                    {
-                        goal.TakeDamage(attackDamage);
-                        timerAttackCooldown = attackCooldown;
-                        
-                    }
-                }
-                else
-                {
-                    isAttackState = false;
-                }
-
-            }
-            
-            if (goal)
-            {
-                agent.destination = goal.transform.position;
-
-                Vector3[] points = agent.path.corners;
-
-                line.positionCount = points.Length;
-
-                line.SetPositions(points);
-                
-            }
-            else
-            {
-                FindClosestGoal();
-            }
-
-            if (isDead == true)
-            {
-                Explode();
+                SwitchToState(new EnemyStateDead());
             }
         }
 
-        void FindClosestGoal()
+        private void SwitchToState(EnemyState newState)
+        {
+            if(newState != null)
+            {
+                if (currentState != null) currentState.OnEnd(this);
+                currentState = newState;
+                currentState.OnStart(this);
+            }
+        }
+
+        void OnTriggerEnter(Collider trigger)
+        {
+
+            if (trigger.GetComponent<EnemyGoal>() != null)
+            {
+                SwitchToState(new EnemyStateAttack());
+            }
+
+        }
+
+        private void OnTriggerStay(Collider trigger)
+        {
+            if (trigger.GetComponent<EnemyGoal>() != null)
+            {
+                SwitchToState(new EnemyStateAttack());
+            }
+
+        }
+
+        void OnTriggerExit(Collider trigger)
+        {
+
+            if (trigger.GetComponent<EnemyGoal>() != null)
+            {
+                SwitchToState(new EnemyStateIdle());
+            }
+        }
+
+        public void FindClosestGoal()
         {
             EnemyGoal[] goals = GameObject.FindObjectsOfType<EnemyGoal>();
 
@@ -105,39 +118,19 @@ namespace Johnson
             }
         }
 
-        void OnTriggerEnter(Collider trigger)
-        {
-           
-            if(trigger.GetComponent<EnemyGoal>() != null)
-            {
-                isAttackState = true;
-            }
-            
-        }
-
-        void OnTriggerExit(Collider trigger)
-        {
-            
-            if (trigger.GetComponent<EnemyGoal>() != null)
-            {
-                isAttackState = false;
-            }
-        }
-
         public void TakeDamage(float amount)
         {
 
             health -= amount;
             healthBar.fillAmount = (health / 100);
         }
-
-        void Explode()
+        public void Explode()
         {
             print("BOOM!");
             // TODO: spawn particles
             // TODO: Play audio
             Destroy(gameObject);
         }
-        
+
     }
 }
