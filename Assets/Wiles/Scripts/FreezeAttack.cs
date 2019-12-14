@@ -23,11 +23,11 @@ namespace Wiles
 
         GameObject owner;
         EnemyController ec;
-        Tower t;
+        TowerController t;
         bool isPlayerFirendly;
 
         List<EnemyController> enemyControllers = new List<EnemyController>();
-        List<Tower> towers = new List<Tower>();
+        List<TowerController> towers = new List<TowerController>();
 
         bool atkMode = false;
         float atkTimer = 15;
@@ -36,7 +36,7 @@ namespace Wiles
         void Start()
         {
             ec = GetComponent<EnemyController>();
-            t = GetComponent<Tower>();
+            t = GetComponent<TowerController>();
 
             if (ec == null && t == null)  //if EnemyController and Tower are both null,
             {
@@ -85,7 +85,7 @@ namespace Wiles
 
         void FreezeAllTowersInRange()
         {
-            foreach (Tower t in towers)
+            foreach (TowerController t in towers)
             {
                 float dis = (t.transform.position - transform.position).magnitude; // distance from tower to enemy
                 if (dis < range)
@@ -114,12 +114,12 @@ namespace Wiles
             return result;
         }
 
-        Tower GetClosestTower()
+        TowerController GetClosestTower()
         {
-            Tower result = null;
+            TowerController result = null;
             float minDis = 0;
             // find closest
-            foreach (Tower t in towers)
+            foreach (TowerController t in towers)
             {
                 float dis = (t.transform.position - transform.position).magnitude; // distance from tower to enemy
                 if (dis < minDis || result == null)
@@ -139,7 +139,7 @@ namespace Wiles
             EnemyController e = collider.GetComponent<EnemyController>();
             if (e != null) enemyControllers.Add(e);
 
-            Tower t = collider.GetComponent<Tower>();
+            TowerController t = collider.GetComponent<TowerController>();
             if (t != null) towers.Add(t);
 
         }
@@ -151,7 +151,7 @@ namespace Wiles
             EnemyController e = collider.GetComponent<EnemyController>();
             if (e != null) enemyControllers.Remove(e);
 
-            Tower t = collider.GetComponent<Tower>();
+            TowerController t = collider.GetComponent<TowerController>();
             if (t != null) towers.Remove(t);
         }
     }

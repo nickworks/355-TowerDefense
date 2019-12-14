@@ -5458,9 +5458,9 @@ MonoBehaviour:
         m_MethodName: set_currentTowerToBuy
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 5245401221801332306, guid: 70a13fe3c48ee7342a34f375225c3426,
+          m_ObjectArgument: {fileID: 3103136664011246871, guid: 70a13fe3c48ee7342a34f375225c3426,
             type: 3}
-          m_ObjectArgumentAssemblyTypeName: Wiles.Tower, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: Wiles.TowerController, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -5698,11 +5698,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9ee9a6938d20694d9d9e0dfb0013700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  basicZapTower: {fileID: 5245401221801332306, guid: e127c5317d64077409fc65fafb234582,
+  basicZapTower: {fileID: 7738012357585155454, guid: e127c5317d64077409fc65fafb234582,
     type: 3}
-  basicProjectileTower: {fileID: 5245401221801332306, guid: 70a13fe3c48ee7342a34f375225c3426,
+  basicProjectileTower: {fileID: 3103136664011246871, guid: 70a13fe3c48ee7342a34f375225c3426,
     type: 3}
-  iceTower: {fileID: 5245401221801332306, guid: bf9ee1ed3f48e5c44b44467575571765,
+  iceTower: {fileID: 8591672505221992887, guid: bf9ee1ed3f48e5c44b44467575571765,
     type: 3}
   totalHealth: {fileID: 455751146}
   money: {fileID: 1395943291}
@@ -5796,9 +5796,9 @@ MonoBehaviour:
         m_MethodName: set_currentTowerToBuy
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 5245401221801332306, guid: e127c5317d64077409fc65fafb234582,
+          m_ObjectArgument: {fileID: 7738012357585155454, guid: e127c5317d64077409fc65fafb234582,
             type: 3}
-          m_ObjectArgumentAssemblyTypeName: Wiles.Tower, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: Wiles.TowerController, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -16489,9 +16489,9 @@ MonoBehaviour:
         m_MethodName: set_currentTowerToBuy
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 5245401221801332306, guid: bf9ee1ed3f48e5c44b44467575571765,
+          m_ObjectArgument: {fileID: 8591672505221992887, guid: bf9ee1ed3f48e5c44b44467575571765,
             type: 3}
-          m_ObjectArgumentAssemblyTypeName: Wiles.Tower, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: Wiles.TowerController, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

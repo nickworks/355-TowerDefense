@@ -4,13 +4,14 @@ using UnityEngine;
 
 namespace Wiles
 {
-    public class Tower : MonoBehaviour
+    public class TowerController : MonoBehaviour
     {
         public float health = 1996;
         public float attackRange = 8;
         public float attackSpeed = 0.8f;
         public float attackDamage = 77;
 
+        bool justFrozen = false;
         bool isFrozen = false;
         float freezeDuration = 4;
 
@@ -23,6 +24,9 @@ namespace Wiles
         public Material frozenMat;
 
         bool cleanUpEnemyList = false;
+
+        TowerState currentState;
+        TowerState previousState;
 
         public bool isDead
         {
@@ -54,29 +58,25 @@ namespace Wiles
         {
             if (isDead) Explode();
 
-            if(cleanUpEnemyList)
+            if (cleanUpEnemyList)
             {
                 RemoveNullEnemies();
                 cleanUpEnemyList = false;
             }
 
-            if (isFrozen)
+            if (currentState == null) SwitchToState(new TowerStateIdle());
+            if (currentState != null) SwitchToState(currentState.Update(this));
+
+            if (justFrozen)
             {
-                mesh.materials[0] = frozenMat;
-                frozenTimer += Time.deltaTime;
-                if (frozenTimer >= freezeDuration)
-                {
-                    mesh.materials[0] = defMat;
-                    isFrozen = false;
-                    frozenTimer = 0;
-                }
-                return;
+                justFrozen = false;
+                SwitchToState(new TowerStateFrozen());
             }
 
             atkTimer += Time.deltaTime;
             if (atkTimer >= attackSpeed)
             {
-                
+
                 print("TIME TO ATTACK!");
                 if (Attack(GetClosestEnemy()) == true)
                 {
@@ -88,10 +88,24 @@ namespace Wiles
             }
 
         }
+        private void SwitchToState(TowerState newState)
+        {
+            if (newState != null)
+            {
+                if (currentState != null) currentState.OnEnd(this);
+                previousState = currentState;
+                currentState = newState;
+                currentState.OnStart(this);
+            }
+        }
         public void Freeze(float duration)
         {
-            isFrozen = true;
-            freezeDuration = duration;
+            if (!isFrozen)
+            {
+                justFrozen = true;
+                isFrozen = true;
+                freezeDuration = duration;
+            }
         }
 
         bool Attack(EnemyController target)
@@ -116,7 +130,7 @@ namespace Wiles
             EnemyController result = null;
             float minDis = 0;
             // find closest
-            foreach(EnemyController e in enemies)
+            foreach (EnemyController e in enemies)
             {
                 if (e == null)
                 {
@@ -124,7 +138,7 @@ namespace Wiles
                     continue; //if this e enemy has already been destroyed but somehow not removed, ignore it.
                 }
                 float dis = (e.transform.position - transform.position).magnitude; // distance from tower to enemy
-                if(dis < minDis || result == null)
+                if (dis < minDis || result == null)
                 {
                     result = e;
                     minDis = dis;
@@ -141,14 +155,16 @@ namespace Wiles
             return enemies[index];
         }
 
-        void OnTriggerEnter(Collider collider) {
+        void OnTriggerEnter(Collider collider)
+        {
             print("something entered my trigger...");
 
             EnemyController e = collider.GetComponent<EnemyController>();
             if (e != null) enemies.Add(e);
 
         }
-        void OnTriggerExit(Collider collider) {
+        void OnTriggerExit(Collider collider)
+        {
             print("something exited my trigger...");
 
 
