@@ -7,9 +7,12 @@ namespace Johnson
     [RequireComponent(typeof(Rigidbody))]
     public class Projectile : MonoBehaviour
     {
-
+        public GameObject tower;
         protected GameObject owner;
         protected Rigidbody body;
+        EnemyController enemy;
+        
+        public float attackDamage = 25;
 
         float speed = 10;
         /// <summary>
@@ -25,10 +28,12 @@ namespace Johnson
         void Start()
         {
             body = GetComponent<Rigidbody>();
+           
         }
 
         public void Shoot(GameObject owner, Vector3 direction)
         {
+            
             this.owner = owner;
             body = GetComponent<Rigidbody>();
             body.velocity = direction * speed;
@@ -55,10 +60,23 @@ namespace Johnson
         private void OnTriggerEnter(Collider other)
         {
 
-            if (other.gameObject == owner) return; // don't hit the shooter of this projectile!
+            if (other.gameObject == owner)
+            {
+                return; // don't hit the shooter of this projectile!
+            }
+            else if (other.gameObject.name == "Tower(Clone)")
+            {
+                return;
+            }
+            if (other.GetComponent<EnemyController>() != null)
+            {
+                enemy = other.GetComponent<EnemyController>();
+                print("hit");
+                enemy.TakeDamage(attackDamage);
+                Destroy(gameObject);
+            }
 
-            print("hit");
-            Destroy(gameObject);
+
         }
     }
 }

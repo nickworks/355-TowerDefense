@@ -37,9 +37,9 @@ namespace Johnson
                 float my = Input.GetAxis("Mouse Y");
 
                 targetPosition -= new Vector3(mx, 0, my) * mouseSensitivity;
-                transform.position = Vector3.Lerp(transform.position, targetPosition, (Time.deltaTime * easing));
             }
-                       
+
+            transform.position = Vector3.Lerp(transform.position, targetPosition, (Time.deltaTime * easing));
         }
     }
 } 

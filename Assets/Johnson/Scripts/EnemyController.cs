@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 namespace Johnson
 {
@@ -10,6 +11,9 @@ namespace Johnson
 
         public float attackCooldown = 0.5f;
         public float attackDamage = 25;
+        [HideInInspector]
+        public float health = 100;
+        public Image healthBar;
 
         LineRenderer line;
 
@@ -17,6 +21,14 @@ namespace Johnson
         EnemyGoal goal;
         bool isAttackState = false;
         float timerAttackCooldown = 0;
+
+        public bool isDead // is a property not a field, so it wont show up in editor
+        {
+            get
+            {
+                return (health <= 0);
+            }
+        }
 
         // Start is called before the first frame update
         void Start()
@@ -64,7 +76,8 @@ namespace Johnson
             {
                 FindClosestGoal();
             }
-            
+
+            if (isDead) Explode();
 
         }
 
@@ -102,6 +115,21 @@ namespace Johnson
             {
                 isAttackState = false;
             }
+        }
+
+        public void TakeDamage(float amount)
+        {
+
+            health -= amount;
+            healthBar.fillAmount = (health / 100);
+        }
+
+        void Explode()
+        {
+            print("BOOM!");
+            // TODO: spawn particles
+            // TODO: Play audio
+            Destroy(gameObject);
         }
     }
 }

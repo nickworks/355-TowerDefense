@@ -26,7 +26,7 @@ namespace Johnson
         }
 
         /// <summary>
-        /// This method is an endless timer to keep a constant flow of enemies for testing
+        /// This function is an endless timer to keep a constant flow of enemies for testing
         /// </summary>
         private void SpawnTimer()
         {
