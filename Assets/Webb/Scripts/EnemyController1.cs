@@ -10,23 +10,25 @@ namespace Webb
 {
     /// <summary>
     /// this enemy does
+    /// it stes up functions to chase enemy goals and attack enemy base
+    /// sets up swithcing up differt states
     /// </summary>
     public class EnemyController1 : MonoBehaviour
     {
-        public float attackCooldown = 0.5f;
-        public float attackDamge = 1;
-        bool slowed;
-        public ParticleSystem coins;
-        NavMeshAgent agent;
-        LineRenderer line;
-       public EnemyGoal goal;   
-        public Image healthBar;
-        int health = 100;
-      public  bool isAttackState;
+        public float attackCooldown = 0.5f;// how long before next attack
+        public float attackDamge = 1; // how much damge each attack does
+        bool slowed;// checks if enemy is slowed
+        public ParticleSystem coins;// particles of coin
+        NavMeshAgent agent; // how enemy moves
+        LineRenderer line;// shows the path
+       public EnemyGoal goal;  // passes in whaht enemy to attak
+        public Image healthBar;// gets refrence to helath bar
+        int health = 100; //keeps track of current health
+      public  bool isAttackState;// checks if its attacking
 
-        float timerAttackCooldown = 0;
+        float timerAttackCooldown = 0; // keeps track of how long before next attack
 
-        EnemyState currentState;
+        EnemyState currentState;// keeps track of what state 
 
 
 
