@@ -2,17 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FreezeTowerState : MonoBehaviour
+namespace Johnson
 {
-    // Start is called before the first frame update
-    void Start()
+    public abstract class FreezeTowerState
     {
-        
-    }
+        public abstract FreezeTowerState Update(FreezeTowerStateMachine freezeTower);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public virtual void OnStart(FreezeTowerStateMachine freezeTower) { }
+        public virtual void OnEnd(FreezeTowerStateMachine freezeTower) { }
     }
 }

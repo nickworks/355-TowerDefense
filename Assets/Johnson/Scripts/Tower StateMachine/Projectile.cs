@@ -17,16 +17,11 @@ namespace Johnson
         
         public float attackDamage = 25;
 
-        float speed = 10;
-        /// <summary>
-        /// How long the bullet can live for.
-        /// </summary>
-        float lifetime = 2;
-
-        /// <summary>
-        /// how many seconds this projectile has been alive
-        /// </summary>
-        float age = 0;
+        float speed = 10; // how fast the projectile can move
+                
+        float lifetime = 2; // How long the bullet can live for
+            
+        float age = 0; // how many seconds this projectile has been alive
 
         void Start()
         {
@@ -67,7 +62,7 @@ namespace Johnson
             {
                 return; // don't hit the shooter of this projectile!
             }
-            else if (other.gameObject.name == "Tower(Clone)")
+            else if (other.gameObject.name == "Tower(Clone)" || other.gameObject.name == "LightningTower(Clone)" || other.gameObject.name == "FreezeTower(Clone)")
             {
                 return;
             }

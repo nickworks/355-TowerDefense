@@ -745,7 +745,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Shooting Tower
 --- !u!222 &628957602
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1147,7 +1147,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Freezing Tower
 --- !u!222 &1250415701
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1528,7 +1528,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1596559723}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1596559723
@@ -1852,7 +1863,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Lightning Tower
 --- !u!222 &1673107474
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1958,12 +1969,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b7a5d9c9176e2143bb91bd2e83a9172, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  towerOneButton: {fileID: 1641133773}
+  towerTwoButton: {fileID: 1039512054}
+  towerThreeButton: {fileID: 1596559722}
   towerCols: 18
   towerRows: 11
   gridSize: 1.5
   gridOffset: {x: -14, y: -13}
   gridHelper: {fileID: 2108824529}
   towerPrefab: {fileID: 7686107607345139761, guid: 68a97064697717a4dad0353204a07c67,
+    type: 3}
+  lightningTowerPrefab: {fileID: 2960119329493955410, guid: b00fcf6e547a5234bbfdc33e91f254b5,
+    type: 3}
+  freezeTowerPrefab: {fileID: -5111675667376378799, guid: 25057c3997772b848a70b5cbc4cd2eda,
     type: 3}
   objectsThatSupportTowers:
     serializedVersion: 2

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// This keeps all the code within the brackets inside this johnson namespace. also other classes must be inside the same namespace to access any other classes code inside the namespace
@@ -9,6 +10,13 @@ namespace Johnson
 {
     public class ClickToSpawnTower : MonoBehaviour
     {
+        public Button towerOneButton;
+        public Button towerTwoButton;
+        public Button towerThreeButton;
+
+        bool isTowerOne = false;
+        bool isTowerTwo = false;
+        bool isTowerThree = false;
 
         struct GridCoords
         {
@@ -30,11 +38,13 @@ namespace Johnson
 
         public TowerStateMachine towerPrefab;
         public LightningTowerStateMachine lightningTowerPrefab;
+        public FreezeTowerStateMachine freezeTowerPrefab;
         public LayerMask objectsThatSupportTowers;
 
         public LayerMask clickableObjects;
 
         static TowerStateMachine _CurrentlySelectedTower;
+        static LightningTowerStateMachine _CurrentlySelectedLightningTower;
 
         static public TowerStateMachine currentlySelectedTower {
             get { return _CurrentlySelectedTower;  }
@@ -45,8 +55,20 @@ namespace Johnson
                 if (_CurrentlySelectedTower != null) _CurrentlySelectedTower.StartSelect();
             }
         }
+        static public LightningTowerStateMachine currentlySelectedLightningTower
+        {
+            get { return _CurrentlySelectedLightningTower; }
+            set
+            {
+                if (_CurrentlySelectedLightningTower != null) _CurrentlySelectedLightningTower.EndSelect();
+                _CurrentlySelectedLightningTower = value;
+                if (_CurrentlySelectedLightningTower != null) _CurrentlySelectedLightningTower.StartSelect();
+            }
+        }
 
-        LightningTowerStateMachine[,] towers;
+        TowerStateMachine[,] towers;
+        LightningTowerStateMachine[,] lightningTowers;
+        FreezeTowerStateMachine[,] freezeTowers;
 
         Camera cam;
 
@@ -55,7 +77,16 @@ namespace Johnson
         {
             cam = GetComponent<Camera>();
 
-            towers = new LightningTowerStateMachine[towerCols, towerRows];
+            Button towerBtn = towerOneButton.GetComponent<Button>();
+            towerBtn.onClick.AddListener(TowerOnClick);
+            Button lightningBtn = towerTwoButton.GetComponent<Button>();
+            lightningBtn.onClick.AddListener(LightningOnClick);
+            Button freezeBtn = towerThreeButton.GetComponent<Button>();
+            freezeBtn.onClick.AddListener(FreezeOnClick);
+
+            towers = new TowerStateMachine[towerCols, towerRows];
+            lightningTowers = new LightningTowerStateMachine[towerCols, towerRows];
+            freezeTowers = new FreezeTowerStateMachine[towerCols, towerRows];
         }
 
         // Update is called once per frame
@@ -76,15 +107,21 @@ namespace Johnson
                 {// shoot ray into scene, detect where it hit
 
                     TowerStateMachine tower = hit.collider.GetComponent<TowerStateMachine>();
-                    if (tower != null)
+                    if (tower != null && isTowerOne)
                     {
                         currentlySelectedTower = tower;
+                    }
+                    LightningTowerStateMachine lightningTower = hit.collider.GetComponent<LightningTowerStateMachine>();
+                    if (tower != null && isTowerTwo)
+                    {
+                        currentlySelectedLightningTower = lightningTower;
                     }
 
                 }
                 else
                 {
                     currentlySelectedTower = null; // deselect
+                    currentlySelectedLightningTower = null;
                 }
             }
         }
@@ -99,25 +136,53 @@ namespace Johnson
                 if (IsValidGridCoords(grid))
                 {
 
-                    LightningTowerStateMachine existingTower = LookupTower(grid);
+                    TowerStateMachine existingTower = LookupTowerPoint(grid);
+                    LightningTowerStateMachine existingLightningTower = LookupLightningPoint(grid);
+                    FreezeTowerStateMachine existineFreezeTower = LookupFreezePoint(grid);
 
-                    if (existingTower == null)
+                    if (existingTower == null && existingLightningTower == null && existineFreezeTower == null)
                     {
 
                         // check ai nav paths
-
-                        LightningTowerStateMachine tower = Instantiate(lightningTowerPrefab, gridHelper.position, Quaternion.identity);
-                        towers[grid.x, grid.y] = tower;
+                        if (isTowerOne)
+                        {
+                            TowerStateMachine tower = Instantiate(towerPrefab, gridHelper.position, Quaternion.identity);
+                            towers[grid.x, grid.y] = tower;
+                        }
+                        else if (isTowerTwo)
+                        {
+                            LightningTowerStateMachine lightningTower = Instantiate(lightningTowerPrefab, gridHelper.position, Quaternion.identity);
+                            lightningTowers[grid.x, grid.y] = lightningTower;
+                        }
+                        else if (isTowerThree)
+                        {
+                            FreezeTowerStateMachine freezeTower = Instantiate(freezeTowerPrefab, gridHelper.position, Quaternion.identity);
+                            freezeTowers[grid.x, grid.y] = freezeTower;
+                        }
                     }
                 }
             }
         }
 
-        private LightningTowerStateMachine LookupTower(GridCoords grid)
+        private TowerStateMachine LookupTowerPoint(GridCoords grid)
         {
             if (!IsValidGridCoords(grid)) return null;
 
             return towers[grid.x, grid.y];
+        }
+
+        private LightningTowerStateMachine LookupLightningPoint(GridCoords grid)
+        {
+            if (!IsValidGridCoords(grid)) return null;
+
+            return lightningTowers[grid.x, grid.y];
+        }
+
+        private FreezeTowerStateMachine LookupFreezePoint(GridCoords grid)
+        {
+            if (!IsValidGridCoords(grid)) return null;
+
+            return freezeTowers[grid.x, grid.y];
         }
 
         private bool IsValidGridCoords(GridCoords grid)
@@ -176,6 +241,28 @@ namespace Johnson
             int gridY = Mathf.FloorToInt(worldPos.z - gridOffset.y / gridSize);
 
             return new GridCoords(gridX, gridY);
+        }
+        
+        void TowerOnClick()
+        {
+            isTowerOne = true;
+            isTowerTwo = false;
+            isTowerThree = false;
+        }
+
+        void LightningOnClick()
+        {
+            isTowerOne = false;
+            isTowerTwo = true;
+            isTowerThree = false;
+
+        }
+
+        void FreezeOnClick()
+        {
+            isTowerOne = false;
+            isTowerTwo = false;
+            isTowerThree = true;
         }
     }
 }

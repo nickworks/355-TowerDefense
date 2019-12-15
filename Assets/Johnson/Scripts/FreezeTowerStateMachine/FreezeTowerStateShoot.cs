@@ -2,17 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FreezeTowerStateShoot : MonoBehaviour
+namespace Johnson
 {
-    // Start is called before the first frame update
-    void Start()
+    public class FreezeTowerStateShoot : FreezeTowerState
     {
-        
-    }
+        public override FreezeTowerState Update(FreezeTowerStateMachine freezeTower)
+        {
+            if (freezeTower.attackTarget != null)
+            {
+                freezeTower.timeUntilNextShot -= Time.deltaTime;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+                if (freezeTower.timeUntilNextShot <= 0)
+                {
+                    freezeTower.enemy.agent.speed = .8f;
+                    freezeTower.enemy.TakeDamage(freezeTower.attackDamage);
+                    freezeTower.timeUntilNextShot = freezeTower.timeBetweenShots;
+                    freezeTower.enemy.isUnfrozen = false;
+                }
+                
+            }
+            return null;
+        }
     }
 }

@@ -35,6 +35,11 @@ namespace Johnson
 
         public float attackDamage = 25; // attack damage of the enemy
 
+        public bool isUnfrozen = true;
+        float frozenTimer = 1.0f;
+        float frozenTimerMax = 1.0f;
+
+
         [HideInInspector]
         public float timerAttackCooldown = 0; // current time for the attacks cooldown
         
@@ -60,6 +65,19 @@ namespace Johnson
         /// </summary>        
         void Update()
         {
+            if (isUnfrozen == false)
+            {
+                frozenTimer -= Time.deltaTime;
+
+                if (frozenTimer <= 0)
+                {
+                    agent.speed = 3.5f;
+                    isUnfrozen = true;
+                    frozenTimer = frozenTimerMax;
+                }
+
+            }
+
             if (timerAttackCooldown > 0) timerAttackCooldown -= Time.deltaTime; // countdown timer for enemy attack
 
             if (currentState == null) SwitchToState(new EnemyStateIdle()); // if currentState is empty, then switch to idle state
