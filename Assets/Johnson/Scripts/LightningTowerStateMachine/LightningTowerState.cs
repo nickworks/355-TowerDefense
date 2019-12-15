@@ -2,17 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LightningTowerState : MonoBehaviour
+namespace Johnson
 {
-    // Start is called before the first frame update
-    void Start()
+    public abstract class LightningTowerState
     {
-        
-    }
+        public abstract LightningTowerState Update(LightningTowerStateMachine lightningTower);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public virtual void OnStart(LightningTowerStateMachine lightningTower) { }
+        public virtual void OnEnd(LightningTowerStateMachine lightningTower) { }
     }
 }

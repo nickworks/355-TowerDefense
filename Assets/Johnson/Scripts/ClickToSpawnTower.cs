@@ -29,6 +29,7 @@ namespace Johnson
         public Transform gridHelper;
 
         public TowerStateMachine towerPrefab;
+        public LightningTowerStateMachine lightningTowerPrefab;
         public LayerMask objectsThatSupportTowers;
 
         public LayerMask clickableObjects;
@@ -45,7 +46,7 @@ namespace Johnson
             }
         }
 
-        TowerStateMachine[,] towers;
+        LightningTowerStateMachine[,] towers;
 
         Camera cam;
 
@@ -54,7 +55,7 @@ namespace Johnson
         {
             cam = GetComponent<Camera>();
 
-            towers = new TowerStateMachine[towerCols, towerRows];
+            towers = new LightningTowerStateMachine[towerCols, towerRows];
         }
 
         // Update is called once per frame
@@ -98,21 +99,21 @@ namespace Johnson
                 if (IsValidGridCoords(grid))
                 {
 
-                    TowerStateMachine existingTower = LookupTower(grid);
+                    LightningTowerStateMachine existingTower = LookupTower(grid);
 
                     if (existingTower == null)
                     {
 
                         // check ai nav paths
 
-                        TowerStateMachine tower = Instantiate(towerPrefab, gridHelper.position, Quaternion.identity);
+                        LightningTowerStateMachine tower = Instantiate(lightningTowerPrefab, gridHelper.position, Quaternion.identity);
                         towers[grid.x, grid.y] = tower;
                     }
                 }
             }
         }
 
-        private TowerStateMachine LookupTower(GridCoords grid)
+        private LightningTowerStateMachine LookupTower(GridCoords grid)
         {
             if (!IsValidGridCoords(grid)) return null;
 
