@@ -20,17 +20,17 @@ namespace Johnson
         /// <returns>It returns back into itself until the current base is destroyed</returns>
         public override EnemyState Update(EnemyStateMachine enemy)
         {
-            if (enemy.goal)
+            if (enemy.goal) // if enemy has reached its goal
             {
-                if (enemy.timerAttackCooldown <= 0)
+                if (enemy.timerAttackCooldown <= 0) // also if the attack cooldown has hit zero
                 {
-                    enemy.goal.TakeDamage(enemy.attackDamage);
-                    enemy.timerAttackCooldown = enemy.attackCooldown;
+                    enemy.goal.TakeDamage(enemy.attackDamage); // attack target
+                    enemy.timerAttackCooldown = enemy.attackCooldown; // reset cooldown timer
 
                 }
             }
            
-            return null;
-        }
-    }
-}
+            return null; // stay in current state
+        } // end update
+    } // end class
+} // end namespace

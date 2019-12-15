@@ -19,9 +19,9 @@ namespace Johnson
         /// <returns>nothing because the enemy is dead</returns>
         public override EnemyState Update(EnemyStateMachine enemy)
         {
-            Debug.Log("boom");
-            enemy.Explode();
-            return null;
-        }
-    }
-}
+            //Debug.Log("boom"); 
+            enemy.Explode(); // tells the enemy to explode(destroy itself)
+            return null; // stay in this state
+        } // end update
+    } // end class
+} // end namespace

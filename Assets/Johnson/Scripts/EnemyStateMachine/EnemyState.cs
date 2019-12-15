@@ -12,11 +12,9 @@ namespace Johnson
     /// </summary>
     public abstract class EnemyState
     {
+        public abstract EnemyState Update(EnemyStateMachine enemy); // creates a special update that can be taken over by other classes
 
-
-        public abstract EnemyState Update(EnemyStateMachine enemy);
-
-        public virtual void OnStart(EnemyStateMachine enemy) { }
-        public virtual void OnEnd(EnemyStateMachine enemy) { }
-    }
-}
+        public virtual void OnStart(EnemyStateMachine enemy) { } // a start function that can be taken over by other classes
+        public virtual void OnEnd(EnemyStateMachine enemy) { } // a end function that can be taken over by other classes
+    } // end class
+} // end namespace
