@@ -40,7 +40,11 @@ coins.Stop();
         }
 
         // Update is called once per frame
-
+        /// <summary>
+        /// updates current sstate
+        /// sets up agent
+        /// sets up line render
+        /// </summary>
         void Update()
         {
             agent = GetComponent<NavMeshAgent>();
@@ -50,7 +54,10 @@ coins.Stop();
             if (currentState != null) SwitchToState(currentState.Update(this));
 
 
-        }
+        }/// <summary>
+        /// switches the state
+        /// </summary>
+        /// <param name="newState"></param>
         private void SwitchToState(EnemyState newState)
         {
             if (newState != null)
@@ -64,9 +71,11 @@ coins.Stop();
 
 
 
-        // Update is called once per frame
+       
 
-
+        /// <summary>
+        /// updates health bar
+        /// </summary>
         public void EnemyHealth() {
             healthBar.fillAmount = health / 100;
             if (health <= 0) Destroy(gameObject); 
@@ -78,7 +87,9 @@ coins.Stop();
                             goal.TakeDamge(attackDamge);
                         //timerAttackCooldown = attackCooldown;
                         }
-              
+              /// <summary>
+              /// stets up to chase current goal
+              /// </summary>
         public void Chase()
         {
             if (goal)
@@ -95,7 +106,9 @@ coins.Stop();
                 FindClosestGoal();
             }
         }
-
+        /// <summary>
+        /// sets up what is clossets goal for enemys to charge after
+        /// </summary>
         private void FindClosestGoal()
         {
             float minDis = 0;
@@ -121,6 +134,10 @@ coins.Stop();
 
             
     }
+        /// <summary>
+        /// checks what is hitting the object it takes dambged based on what projectile is hitting it
+        /// </summary>
+        /// <param name="trigger"></param>
         void OnTriggerEnter(Collider trigger)
             {
                 if (trigger.transform.tag == "Dark")
@@ -154,6 +171,10 @@ coins.Stop();
 
                 }
             }
+        /// <summary>
+        /// when it leaves enemy goal it changes its target
+        /// </summary>
+        /// <param name="trigger"></param>
             void OnTriggerExit(Collider trigger)
             {
                 if (trigger.GetComponent<EnemyGoal>() != null)

@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 namespace Webb
-{
+{/// <summary>
+/// stets up the stated deign pattern
+/// </summary>
     public abstract class EnemyState
     {
         public abstract EnemyState Update(EnemyController1 enemy);

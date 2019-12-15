@@ -2,19 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+// changes the hud based on whats clicked
 namespace Webb
 {
     public class HUDController : MonoBehaviour
     {
         // Start is called before the first frame update
-        public Transform panelMain;
-        public Transform panelUpgrade;
-        public Text panelUpgradeText;
+        public Transform panelMain;// refrence to panal main
+        public Transform panelUpgrade;// refrence to panal upgrad
+        public Text panelUpgradeText; // refrence to panalupgradetext
         void Start()
         {
 
         }
+        /// <summary>
+        /// looks for what tower is selceted
+        /// </summary>
         public void TriggerUpgrade1()
         {
             if (ClickToSpawnTower.currentlySelectedTower != null)
