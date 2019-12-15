@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2022597244271329914}
   - component: {fileID: 2022597244271329915}
   - component: {fileID: 2022597244271329912}
-  - component: {fileID: 2022597244271329913}
   - component: {fileID: 6489340759035397576}
   - component: {fileID: 3531804619226587329}
   - component: {fileID: 1015359892491140701}
@@ -122,22 +121,6 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &2022597244271329913
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2022597244271329918}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54e8dddf6de9adb4a9da92b26a6f4b95, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackCooldown: 0.5
-  attackDamage: 25
-  health: 100
-  healthBar: {fileID: 158203527448091687}
 --- !u!114 &6489340759035397576
 MonoBehaviour:
   m_ObjectHideFlags: 0

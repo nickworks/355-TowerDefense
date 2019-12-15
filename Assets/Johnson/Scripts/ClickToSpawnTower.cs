@@ -28,14 +28,14 @@ namespace Johnson
         public Vector2 gridOffset = Vector2.zero;
         public Transform gridHelper;
 
-        public Tower towerPrefab;
+        public TowerStateMachine towerPrefab;
         public LayerMask objectsThatSupportTowers;
 
         public LayerMask clickableObjects;
 
-        static Tower _CurrentlySelectedTower;
+        static TowerStateMachine _CurrentlySelectedTower;
 
-        static public Tower currentlySelectedTower {
+        static public TowerStateMachine currentlySelectedTower {
             get { return _CurrentlySelectedTower;  }
             set
             {
@@ -45,7 +45,7 @@ namespace Johnson
             }
         }
 
-        Tower[,] towers;
+        TowerStateMachine[,] towers;
 
         Camera cam;
 
@@ -54,7 +54,7 @@ namespace Johnson
         {
             cam = GetComponent<Camera>();
 
-            towers = new Tower[towerCols, towerRows];
+            towers = new TowerStateMachine[towerCols, towerRows];
         }
 
         // Update is called once per frame
@@ -74,7 +74,7 @@ namespace Johnson
                 if (Physics.Raycast(ray, out RaycastHit hit, 50, clickableObjects))
                 {// shoot ray into scene, detect where it hit
 
-                    Tower tower = hit.collider.GetComponent<Tower>();
+                    TowerStateMachine tower = hit.collider.GetComponent<TowerStateMachine>();
                     if (tower != null)
                     {
                         currentlySelectedTower = tower;
@@ -98,21 +98,21 @@ namespace Johnson
                 if (IsValidGridCoords(grid))
                 {
 
-                    Tower existingTower = LookupTower(grid);
+                    TowerStateMachine existingTower = LookupTower(grid);
 
                     if (existingTower == null)
                     {
 
                         // check ai nav paths
 
-                        Tower tower = Instantiate(towerPrefab, gridHelper.position, Quaternion.identity);
+                        TowerStateMachine tower = Instantiate(towerPrefab, gridHelper.position, Quaternion.identity);
                         towers[grid.x, grid.y] = tower;
                     }
                 }
             }
         }
 
-        private Tower LookupTower(GridCoords grid)
+        private TowerStateMachine LookupTower(GridCoords grid)
         {
             if (!IsValidGridCoords(grid)) return null;
 

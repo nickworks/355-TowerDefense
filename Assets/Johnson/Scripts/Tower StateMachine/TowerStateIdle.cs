@@ -8,9 +8,9 @@ namespace Johnson
     {
 
 
-        public override TowerState Update(Tower tower)
+        public override TowerState Update(TowerStateMachine tower)
         {
-
+            tower.GetClosestEnemy();
             return null;
         }
 

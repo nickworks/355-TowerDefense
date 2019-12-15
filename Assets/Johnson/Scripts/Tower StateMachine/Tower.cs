@@ -15,7 +15,7 @@ namespace Johnson
         float timeBetweenShots = .5f; // this holds the time that the boss has to wait before firing again
         float timeUntilNextShot = 2; // this hold the time until the next shot
 
-        List<EnemyController> enemies = new List<EnemyController>();
+        List<EnemyStateMachine> enemies = new List<EnemyStateMachine>();
         float timerAttackCooldown = 0;
 
         [HideInInspector]
@@ -48,13 +48,13 @@ namespace Johnson
             GetComponent<MeshRenderer>().material.color = Color.red;
         }
 
-        EnemyController GetClosestEnemy()
+        EnemyStateMachine GetClosestEnemy()
         {
-            EnemyController result = null;
+            EnemyStateMachine result = null;
             float minDis = 0;
             // find closest
             
-            foreach (EnemyController e in enemies)
+            foreach (EnemyStateMachine e in enemies)
             {
                 float dis = (e.transform.position - transform.position).magnitude; // distance from tower to enemy
                 
@@ -72,7 +72,7 @@ namespace Johnson
 
 
 
-        EnemyController GetRandomEnemy()
+        EnemyStateMachine GetRandomEnemy()
         {
             
             if (enemies.Count <= 0) return null;
@@ -86,7 +86,7 @@ namespace Johnson
 
         void OnTriggerEnter(Collider collider)
         {
-            EnemyController e = collider.GetComponent<EnemyController>();
+            EnemyStateMachine e = collider.GetComponent<EnemyStateMachine>();
             if(e != null)
             {
                 attackTarget = e.transform;
@@ -104,7 +104,7 @@ namespace Johnson
         }
         private void OnTriggerStay(Collider collider)
         {
-            EnemyController e = collider.GetComponent<EnemyController>();
+            EnemyStateMachine e = collider.GetComponent<EnemyStateMachine>();
             if (e != null)
             {
                 attackTarget = e.transform;
@@ -120,7 +120,7 @@ namespace Johnson
         }
         void OnTriggerExit(Collider collider)
         {
-            EnemyController e = collider.GetComponent<EnemyController>();
+            EnemyStateMachine e = collider.GetComponent<EnemyStateMachine>();
             if (e != null)
             {
                 enemies.Remove(e);

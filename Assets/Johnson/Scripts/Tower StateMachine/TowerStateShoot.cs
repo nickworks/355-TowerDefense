@@ -6,19 +6,20 @@ namespace Johnson
 {
     public class TowerStateShoot : TowerState
     {
-        float timeBetweenShots = .5f;
-        float timeUntilNextShot = 2;
 
-        public override TowerState Update(Tower tower)
+        public override TowerState Update(TowerStateMachine tower)
         {
-            timeUntilNextShot -= Time.deltaTime;
 
-            if(timeUntilNextShot <= 0)
+            if (tower.attackTarget != null)
             {
-                tower.ShootProjectile();
-                timeUntilNextShot = timeBetweenShots;
-            }
+                tower.timeUntilNextShot -= Time.deltaTime;
 
+                if (tower.timeUntilNextShot <= 0)
+                {
+                    tower.ShootProjectile();
+                    tower.timeUntilNextShot = tower.timeBetweenShots;
+                }
+            }
             return null;
         }
     }

@@ -12,9 +12,9 @@ namespace Johnson
     /// </summary>
     public abstract class TowerState
     {
-        public abstract TowerState Update(Tower tower);
+        public abstract TowerState Update(TowerStateMachine tower);
 
-        public virtual void OnStart(Tower tower) { }
-        public virtual void OnEnd(Tower tower) { }
+        public virtual void OnStart(TowerStateMachine tower) { }
+        public virtual void OnEnd(TowerStateMachine tower) { }
     }
 }

@@ -1963,7 +1963,7 @@ MonoBehaviour:
   gridSize: 1.5
   gridOffset: {x: -14, y: -13}
   gridHelper: {fileID: 2108824529}
-  towerPrefab: {fileID: 258024012599299544, guid: 68a97064697717a4dad0353204a07c67,
+  towerPrefab: {fileID: 7686107607345139761, guid: 68a97064697717a4dad0353204a07c67,
     type: 3}
   objectsThatSupportTowers:
     serializedVersion: 2
