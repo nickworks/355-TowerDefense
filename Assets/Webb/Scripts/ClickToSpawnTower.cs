@@ -3,13 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace Webb
 {
+    /// <summary>
+    /// this does a lot
+    /// sets the towers that we spawn from this script to a grid and sets viusal to mouse
+    /// sets what tower to spawn
+    /// sets what tower u are clicked on
+    /// 
+    /// </summary>
     public class ClickToSpawnTower : MonoBehaviour
     {
 
-        public bool buildDarkTower = true;
-        public bool buildNatrueTower = false;
-        public bool buildLightTower = false;
+        public bool buildDarkTower = true;//whther to spawn this tower or not
+        public bool buildNatrueTower = false;//whther to spawn this tower or not
+        public bool buildLightTower = false;//whther to spawn this tower or not
 
+        /// <summary>
+        /// sets up the grid cords
+        /// </summary>
         struct GridCoords
         {
             public int x;
@@ -23,23 +33,26 @@ namespace Webb
 
             
         }
-        public Vector2 gridOffset = Vector2.zero;
-        public int towerCols = 4;
-        public int towerRows = 4;
-        public float gridSize = 1.25f;
-        public Transform gridHelper;
-        public LayerMask objectsThatSupportTowers;
-        public LayerMask clickableObjects;
-        Tower[,] towers;
+        public Vector2 gridOffset = Vector2.zero; // moves the grid
+        public int towerCols = 4;// whoe many cols
+        public int towerRows = 4;// how may rows
+        public float gridSize = 1.25f;// how big the grid spots are
+        public Transform gridHelper;// oves the visual where 
+        public LayerMask objectsThatSupportTowers; // sets a layer masj so only objects checkon that layer will be affectd 
+        public LayerMask clickableObjects;// sets a layer masj so only objects checkon that layer will be affectd 
+        Tower[,] towers;//sets a towers array
        
-        Camera cam;
-        public Tower towerPrefab;
-        public Tower towerPrefabLight;
-        public Tower towerPrefabNature;
+        Camera cam; // refrence to camera
+        public Tower towerPrefab; // brings in tower to spawn 
+        public Tower towerPrefabLight;// brings in tower to spawn
+        public Tower towerPrefabNature;// brings in tower to spawn
 
         private float gridX;
-        static Tower _currentlySelectedTower;
-         static public Tower currentlySelectedTower
+        static Tower _currentlySelectedTower; // checks what tower is selected
+      /// <summary>
+      /// stes what tower is selected
+      /// </summary>
+        static public Tower currentlySelectedTower
         {
             get { return _currentlySelectedTower; }
             set
@@ -51,6 +64,9 @@ namespace Webb
         }
 
         // Start is called before the first frame update
+        /// <summary>
+        /// sets refrence of cam and sets up array for tower cols and towerrols
+        /// </summary>
         void Start()
         {
             cam = GetComponent<Camera>();
@@ -58,13 +74,21 @@ namespace Webb
         }
 
         // Update is called once per frame
+        /// <summary>
+        /// moves the visual of where towers are being place
+        /// spawns towers on grids 
+        /// allows towers to be clicked
+        /// </summary>
         void Update()
         {
             SetHelperToMouse();
             SpawnTowerOnRightClick();
             ClickedTower();
         }
-
+        /// <summary>
+        /// checks what towers are cliceked
+        /// and cast a ray to click a towere 
+        /// </summary>
        public void ClickedTower()
         {
             if (Input.GetButtonDown("Fire1"))
@@ -87,7 +111,9 @@ namespace Webb
                 }
             }
         }
-
+        /// <summary>
+        /// spawns a tower on the grid on right click acording to whatever tower is selcted
+        /// </summary>
         private void SpawnTowerOnRightClick()
         {
             if (Input.GetButtonDown("Fire2"))
@@ -120,24 +146,38 @@ namespace Webb
                 }
             }
         }
+        /// <summary>
+        /// mkaes so this tower is spawned and no others
+        /// </summary>
         public void SpawnDarkTower()
         {
             buildDarkTower = true;
             buildNatrueTower = false;
             buildLightTower = false;
         }
+        /// <summary>
+        /// mkaes so this tower is spawned and no others
+        /// </summary>
         public void SpawnLightTower()
         {
             buildDarkTower = false;
             buildNatrueTower = false;
             buildLightTower = true;
         }
+        /// <summary>
+        /// mkaes so this tower is spawned and no others
+        /// </summary>
         public void SpawnNatrueTower()
         {
             buildDarkTower = false;
             buildNatrueTower = true;
             buildLightTower = false;
         }
+        /// <summary>
+        /// checks if where ur clicking is on vaild grid cords
+        /// </summary>
+        /// <param name="grid"></param>
+        /// <returns></returns>
         private bool IsValidGridCoords(GridCoords grid)
         {
              if (grid.x < 0) return false;
@@ -148,11 +188,19 @@ namespace Webb
 
             return true;
         }
+        /// <summary>
+        /// checks  if towers on vaild cords
+        /// </summary>
+        /// <param name="grid"></param>
+        /// <returns></returns>
         private Tower LookUpTower(GridCoords grid)
         {
             if (!IsValidGridCoords(grid)) return null;
             return towers[grid.x, grid.y];
         }
+        /// <summary>
+        /// makes the visual fllow the mouse so u can see where tower spanes
+        /// </summary>
 
         private void SetHelperToMouse()
         {
@@ -176,7 +224,8 @@ namespace Webb
         /// returns the world postions ceter of provide gridcors
         /// </summary>
         /// <param name="grid"></param>
-        /// <returns></returns>
+        /// <returns></returns
+        /// >
         private Vector3 CoordsGridToWorld(GridCoords grid)
         {
             float x = grid.x * gridSize + gridSize / 2 + gridOffset.x;

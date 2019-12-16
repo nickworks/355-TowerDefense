@@ -233,7 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a75e184b2092ba741b3377dc788138e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabDarkPostion: {fileID: 843301490119646276, guid: 44fc8d0c046fe5a44b2cc582f4d6a301,
+  prefabDarkPostion: {fileID: 843301490119646276, guid: 1e2d44e93f8f41d429ae6cac73e14852,
     type: 3}
   tower: {fileID: 2100000, guid: 173e1ec2cef29fa4684db0bb28ba7265, type: 2}
   clicked: {fileID: 2100000, guid: ee4e82110a4a9584aa5d7b4b71d174d5, type: 2}

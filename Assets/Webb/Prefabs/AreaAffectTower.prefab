@@ -97,7 +97,7 @@ MonoBehaviour:
     type: 3}
   tower: {fileID: 2100000, guid: f18a7249f4e046e46a992a92819da2a3, type: 2}
   clicked: {fileID: 2100000, guid: ee4e82110a4a9584aa5d7b4b71d174d5, type: 2}
-  coolDown: 0.5
+  coolDown: 3
 --- !u!135 &83297840822034816
 SphereCollider:
   m_ObjectHideFlags: 0

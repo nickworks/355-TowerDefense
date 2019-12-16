@@ -10,23 +10,25 @@ namespace Webb
 {
     /// <summary>
     /// this enemy does
+    /// it stes up functions to chase enemy goals and attack enemy base
+    /// sets up swithcing up differt states
     /// </summary>
     public class EnemyController1 : MonoBehaviour
     {
-        public float attackCooldown = 0.5f;
-        public float attackDamge = 1;
-        bool slowed;
-        public ParticleSystem coins;
-        NavMeshAgent agent;
-        LineRenderer line;
-       public EnemyGoal goal;   
-        public Image healthBar;
-        int health = 100;
-      public  bool isAttackState;
+        public float attackCooldown = 0.5f;// how long before next attack
+        public float attackDamge = 1; // how much damge each attack does
+        bool slowed;// checks if enemy is slowed
+        public ParticleSystem coins;// particles of coin
+        NavMeshAgent agent; // how enemy moves
+        LineRenderer line;// shows the path
+       public EnemyGoal goal;  // passes in whaht enemy to attak
+        public Image healthBar;// gets refrence to helath bar
+        int health = 100; //keeps track of current health
+      public  bool isAttackState;// checks if its attacking
 
-        float timerAttackCooldown = 0;
+        float timerAttackCooldown = 0; // keeps track of how long before next attack
 
-        EnemyState currentState;
+        EnemyState currentState;// keeps track of what state 
 
 
 
@@ -38,7 +40,11 @@ coins.Stop();
         }
 
         // Update is called once per frame
-
+        /// <summary>
+        /// updates current sstate
+        /// sets up agent
+        /// sets up line render
+        /// </summary>
         void Update()
         {
             agent = GetComponent<NavMeshAgent>();
@@ -48,7 +54,10 @@ coins.Stop();
             if (currentState != null) SwitchToState(currentState.Update(this));
 
 
-        }
+        }/// <summary>
+        /// switches the state
+        /// </summary>
+        /// <param name="newState"></param>
         private void SwitchToState(EnemyState newState)
         {
             if (newState != null)
@@ -62,9 +71,11 @@ coins.Stop();
 
 
 
-        // Update is called once per frame
+       
 
-
+        /// <summary>
+        /// updates health bar
+        /// </summary>
         public void EnemyHealth() {
             healthBar.fillAmount = health / 100;
             if (health <= 0) Destroy(gameObject); 
@@ -76,7 +87,9 @@ coins.Stop();
                             goal.TakeDamge(attackDamge);
                         //timerAttackCooldown = attackCooldown;
                         }
-              
+              /// <summary>
+              /// stets up to chase current goal
+              /// </summary>
         public void Chase()
         {
             if (goal)
@@ -93,7 +106,9 @@ coins.Stop();
                 FindClosestGoal();
             }
         }
-
+        /// <summary>
+        /// sets up what is clossets goal for enemys to charge after
+        /// </summary>
         private void FindClosestGoal()
         {
             float minDis = 0;
@@ -119,6 +134,10 @@ coins.Stop();
 
             
     }
+        /// <summary>
+        /// checks what is hitting the object it takes dambged based on what projectile is hitting it
+        /// </summary>
+        /// <param name="trigger"></param>
         void OnTriggerEnter(Collider trigger)
             {
                 if (trigger.transform.tag == "Dark")
@@ -152,6 +171,10 @@ coins.Stop();
 
                 }
             }
+        /// <summary>
+        /// when it leaves enemy goal it changes its target
+        /// </summary>
+        /// <param name="trigger"></param>
             void OnTriggerExit(Collider trigger)
             {
                 if (trigger.GetComponent<EnemyGoal>() != null)
