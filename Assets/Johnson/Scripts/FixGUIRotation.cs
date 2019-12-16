@@ -19,6 +19,6 @@ namespace Johnson
         void LateUpdate()
         {
             gui.rotation = Quaternion.Euler(60, 0, 0); // this rotates the GUI towards the camera
-        }
-    }
-}
+        } // end update
+    } // end class
+} // end namespace

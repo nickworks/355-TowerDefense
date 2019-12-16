@@ -65,18 +65,18 @@ namespace Johnson
         /// </summary>        
         void Update()
         {
-            if (isUnfrozen == false)
+            if (isUnfrozen == false) // if the enemy is frozen
             {
-                frozenTimer -= Time.deltaTime;
+                frozenTimer -= Time.deltaTime; // count down defrost time
 
-                if (frozenTimer <= 0)
+                if (frozenTimer <= 0) // if defrost time hits 0 or less
                 {
-                    agent.speed = 3.5f;
-                    isUnfrozen = true;
-                    frozenTimer = frozenTimerMax;
-                }
+                    agent.speed = 3.5f; // return normal speed
+                    isUnfrozen = true; // is no longer frozen
+                    frozenTimer = frozenTimerMax; // reset the timer
+                } // end if
 
-            }
+            } // end if
 
             if (timerAttackCooldown > 0) timerAttackCooldown -= Time.deltaTime; // countdown timer for enemy attack
 

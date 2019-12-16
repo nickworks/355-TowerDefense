@@ -8,7 +8,7 @@ using UnityEngine;
 namespace Johnson
 {
     /// <summary>
-    /// 
+    /// This class is responsible for the idle state controls ... also this probably should be named pursue... but im lazy
     /// </summary>
     public class EnemyStateIdle : EnemyState
     {

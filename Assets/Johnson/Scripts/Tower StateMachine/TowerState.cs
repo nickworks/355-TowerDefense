@@ -12,9 +12,9 @@ namespace Johnson
     /// </summary>
     public abstract class TowerState
     {
-        public abstract TowerState Update(TowerStateMachine tower);
+        public abstract TowerState Update(TowerStateMachine tower); // creates a special update that can be taken over by other classes
 
-        public virtual void OnStart(TowerStateMachine tower) { }
-        public virtual void OnEnd(TowerStateMachine tower) { }
-    }
-}
+        public virtual void OnStart(TowerStateMachine tower) { } // a start function that can be taken over by other classes
+        public virtual void OnEnd(TowerStateMachine tower) { } // a end function that can be taken over by other classes
+    } // end class
+} // end namespace
