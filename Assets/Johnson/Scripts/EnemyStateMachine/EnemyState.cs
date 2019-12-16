@@ -10,11 +10,11 @@ namespace Johnson
     /// <summary>
     /// This class is an empty class for it to be taken over by other classes, for the state machine
     /// </summary>
-    public abstract class TowerState
+    public abstract class EnemyState
     {
-        public abstract TowerState Update(TowerStateMachine tower); // creates a special update that can be taken over by other classes
+        public abstract EnemyState Update(EnemyStateMachine enemy); // creates a special update that can be taken over by other classes
 
-        public virtual void OnStart(TowerStateMachine tower) { } // a start function that can be taken over by other classes
-        public virtual void OnEnd(TowerStateMachine tower) { } // a end function that can be taken over by other classes
+        public virtual void OnStart(EnemyStateMachine enemy) { } // a start function that can be taken over by other classes
+        public virtual void OnEnd(EnemyStateMachine enemy) { } // a end function that can be taken over by other classes
     } // end class
 } // end namespace

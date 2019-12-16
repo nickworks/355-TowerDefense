@@ -4,9 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
+/// <summary>
+/// This keeps all the code within the brackets inside this johnson namespace. also other classes must be inside the same namespace to access any other classes code inside the namespace
+/// </summary>
 namespace Johnson
 {
+    /// <summary>
+    /// This class handles the base functions
+    /// </summary>
     public class EnemyGoal : MonoBehaviour
     {
         [HideInInspector]
@@ -21,13 +26,18 @@ namespace Johnson
             }
         }
 
-        // Update is called once per frame
+        /// <summary>
+        /// update is called once per frame
+        /// </summary>
         void Update()
         {
             if (isDead) Explode();
             
         }
 
+        /// <summary>
+        /// this handles the death animation for the base
+        /// </summary>
         void Explode()
         {
             print("BOOM!");
@@ -36,9 +46,12 @@ namespace Johnson
             Destroy(gameObject);
         }
 
+        /// <summary>
+        /// This function handles updating health GUI for any incoming damage
+        /// </summary>
+        /// <param name="amount"></param>
         public void TakeDamage(float amount)
         {
-            
             health -= amount;
             healthBar.fillAmount = (health/100);
         }

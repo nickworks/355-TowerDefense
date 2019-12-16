@@ -12,6 +12,7 @@ TagManager:
   - Dark
   - Light
   - Nature
+  - Tower
   layers:
   - Default
   - TransparentFX

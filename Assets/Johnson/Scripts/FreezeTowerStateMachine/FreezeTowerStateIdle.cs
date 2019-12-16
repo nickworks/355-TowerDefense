@@ -10,17 +10,16 @@ namespace Johnson
     /// <summary>
     /// This class is responsible for the idle state controls for this tower
     /// </summary>
-    public class TowerStateIdle : TowerState
+    public class FreezeTowerStateIdle : FreezeTowerState
     {
         /// <summary>
-        /// overrides the tower update to use in this current state
+        /// Overrides the freeze tower update to use in this current state
         /// </summary>
-        /// <param name="tower">stores a reference of the TowerStateMachine in tower</param>
+        /// <param name="freezeTower">stores a reference of the FreezeTowerStateMachine in freezeTower</param>
         /// <returns>It returns back into itself until something happens</returns>
-        public override TowerState Update(TowerStateMachine tower)
+        public override FreezeTowerState Update(FreezeTowerStateMachine freezeTower)
         {
-            tower.GetClosestEnemy(); // locates the closest enemy to the tower
-            return null; // return back into itself
+            return null;// stay in current state
         } // end update
     } // end class
 } // end namespace
