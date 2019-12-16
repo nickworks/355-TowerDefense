@@ -20,7 +20,7 @@ namespace Johnson
 
                 if (freezeTower.timeUntilNextShot <= 0)
                 {
-                    freezeTower.enemy.agent.speed = 0f; // stop enemy movement
+                    freezeTower.enemy.agent.speed = 1.5f; // slows enemy movement
                     if (freezeTower.enemy.isUnfrozen)
                     {
                         freezeTower.enemy.isUnfrozen = false; // freeze enemy

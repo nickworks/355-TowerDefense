@@ -7,6 +7,10 @@ using UnityEngine;
 /// </summary>
 namespace Johnson
 {
+
+    /// <summary>
+    /// this class handles the movement of the camera
+    /// </summary>
     public class CameraMovement : MonoBehaviour
     {
 
@@ -16,12 +20,18 @@ namespace Johnson
         Vector3 targetPosition;
 
         bool isDragging = false;
+
+        /// <summary>
+        /// the constructor function
+        /// </summary>
         void Start()
         {
             targetPosition = transform.position;
         }
 
-        // Update is called once per frame
+        /// <summary>
+        /// This handles the logic for moving the camera around the scene
+        /// </summary>
         void Update()
         {
            

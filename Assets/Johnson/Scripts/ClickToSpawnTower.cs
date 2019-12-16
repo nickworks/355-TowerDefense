@@ -8,6 +8,9 @@ using UnityEngine.UI;
 /// </summary>
 namespace Johnson
 {
+    /// <summary>
+    /// this class handles the spawning of all the towers
+    /// </summary>
     public class ClickToSpawnTower : MonoBehaviour
     {
         public Button towerOneButton;
@@ -18,6 +21,9 @@ namespace Johnson
         bool isTowerTwo = false;
         bool isTowerThree = false;
 
+        /// <summary>
+        /// create a grid with the same x and y as the gameobject
+        /// </summary>
         struct GridCoords
         {
             public int x;
@@ -98,6 +104,9 @@ namespace Johnson
 
         }
 
+        /// <summary>
+        /// Handles when a tower is selected, doesn't work anymore
+        /// </summary>
         private void ClickToSelectTower()
         {
             if (Input.GetButtonDown("Fire1") && Input.GetButton("Jump")) // on left click + spacebar
@@ -126,6 +135,9 @@ namespace Johnson
             }
         }
 
+        /// <summary>
+        /// this function handles the spawning of desired tower when right mouse button is pressed
+        /// </summary>
         private void SpawnTowerOnRightClick()
         {
             if (Input.GetButtonDown("Fire2"))
@@ -164,27 +176,44 @@ namespace Johnson
             }
         }
 
+        /// <summary>
+        /// this handles the looking up of a current grid cell
+        /// </summary>
+        /// <param name="grid">stores a copy of the grid</param>
+        /// <returns>The current coordinates</returns>
         private TowerStateMachine LookupTowerPoint(GridCoords grid)
         {
             if (!IsValidGridCoords(grid)) return null;
 
             return towers[grid.x, grid.y];
         }
-
+        /// <summary>
+        /// this handles the looking up of a current grid cell
+        /// </summary>
+        /// <param name="grid">stores a copy of the grid</param>
+        /// <returns>The current coordinates</returns>
         private LightningTowerStateMachine LookupLightningPoint(GridCoords grid)
         {
             if (!IsValidGridCoords(grid)) return null;
 
             return lightningTowers[grid.x, grid.y];
         }
-
+        /// <summary>
+        /// this handles the looking up of a current grid cell
+        /// </summary>
+        /// <param name="grid">stores a copy of the grid</param>
+        /// <returns>The current coordinates</returns>
         private FreezeTowerStateMachine LookupFreezePoint(GridCoords grid)
         {
             if (!IsValidGridCoords(grid)) return null;
 
             return freezeTowers[grid.x, grid.y];
         }
-
+        /// <summary>
+        /// this function checks the array spot to see if it is a empty spot
+        /// </summary>
+        /// <param name="grid">stores a copy of the grid</param>
+        /// <returns>true for is valid</returns>
         private bool IsValidGridCoords(GridCoords grid)
         {
             if (grid.x < 0) return false;
@@ -196,7 +225,9 @@ namespace Johnson
         }
 
         
-
+        /// <summary>
+        /// This function handles the selecting of tower spawn locations, basically taking mouse location and bringing it into the scene
+        /// </summary>
         private void SetHelperToMouse()
         {
             
@@ -221,9 +252,9 @@ namespace Johnson
         }
 
         /// <summary>
-        /// 
+        /// This function handles placing the grid into the scene
         /// </summary>
-        /// <param name="grid"></param>
+        /// <param name="grid">stores a copy of the grid</param>
         /// <returns>The world-position center of the provided GridCoords</returns>
         private Vector3 CoordsGridToWorld(GridCoords grid)
         {
@@ -231,10 +262,12 @@ namespace Johnson
             float y = grid.y * gridSize + gridSize / 2 + gridOffset.y;
 
             return new Vector3(x, 0, y);
-
-
         }
-
+        /// <summary>
+        /// This function handles placing the scene into the grid
+        /// </summary>
+        /// <param name="worldPos">gets the selected spot from the scene</param>
+        /// <returns>the grids coordinates</returns>
         private GridCoords CoordsWorldToGrid(Vector3 worldPos)
         {
             int gridX = Mathf.FloorToInt(worldPos.x - gridOffset.x / gridSize);
@@ -243,6 +276,9 @@ namespace Johnson
             return new GridCoords(gridX, gridY);
         }
         
+        /// <summary>
+        /// tells that button 1 was pressed
+        /// </summary>
         void TowerOnClick()
         {
             isTowerOne = true;
@@ -250,6 +286,9 @@ namespace Johnson
             isTowerThree = false;
         }
 
+        /// <summary>
+        /// tells that button 2 was pressed
+        /// </summary>
         void LightningOnClick()
         {
             isTowerOne = false;
@@ -258,6 +297,9 @@ namespace Johnson
 
         }
 
+        /// <summary>
+        /// tells that button 3 was pressed
+        /// </summary>
         void FreezeOnClick()
         {
             isTowerOne = false;
