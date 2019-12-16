@@ -14,6 +14,7 @@ namespace Wiles
         public float attackCooldown = 0.5f;
         public float speed = 2.5f;
 
+        public Transform gui;
         public Image healthBar;
 
         NavMeshAgent agent;
@@ -22,6 +23,10 @@ namespace Wiles
         bool isAttackState = false;
         private float timerAttackCooldown = 0;
         float maxHealth;
+
+        public bool justFrozen = false;
+        public bool isFrozen = false;
+        public float freezeDuration = 4;
 
         public bool isDead
         {
@@ -38,6 +43,11 @@ namespace Wiles
             line = GetComponent<LineRenderer>();
             maxHealth = health;
 
+        }
+
+        void LateUpdate()
+        {
+            gui.rotation = Quaternion.Euler(60, 0, 0);
         }
 
         // Update is called once per frame
@@ -85,6 +95,15 @@ namespace Wiles
             {
                 FindClosestGoal();
 
+            }
+        }
+        public void Freeze(float duration)
+        {
+            if (!isFrozen)
+            {
+                justFrozen = true;
+                isFrozen = true;
+                freezeDuration = duration;
             }
         }
 

@@ -136,6 +136,7 @@ MonoBehaviour:
   attackRange: 0
   attackCooldown: 1.4
   speed: 2
+  gui: {fileID: 3845103042083259412}
   healthBar: {fileID: 8062852379284922728}
 --- !u!54 &1481421246339210694
 Rigidbody:

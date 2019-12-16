@@ -33,12 +33,12 @@ namespace Wiles
         public Transform gridHelper;
 
         public GameObject enemyPrefab;
-        public Tower towerPrefab;
+        public TowerController towerPrefab;
         public LayerMask objectsThatSupportTowers;
         public LayerMask clickableObjects;
 
-        Tower _currentlySelectedTower;
-        public Tower currentlySelectedTower
+        TowerController _currentlySelectedTower;
+        public TowerController currentlySelectedTower
         {
             get { return _currentlySelectedTower; }
             set {
@@ -48,8 +48,8 @@ namespace Wiles
             }
         }
 
-        Tower _currentTowerToBuy;
-        public Tower currentTowerToBuy
+        TowerController _currentTowerToBuy;
+        public TowerController currentTowerToBuy
         {
             get { return _currentTowerToBuy; }
             set
@@ -61,7 +61,7 @@ namespace Wiles
         }
 
 
-        Tower[,] towers;
+        TowerController[,] towers;
 
         Camera cam;
 
@@ -70,7 +70,7 @@ namespace Wiles
         {
             cam = GetComponent<Camera>();
 
-            towers = new Tower[towerCols, towerRows];
+            towers = new TowerController[towerCols, towerRows];
 
         }
 
@@ -102,7 +102,7 @@ namespace Wiles
                 if (Physics.Raycast(ray, out RaycastHit hit, 50, objectsThatSupportTowers)) // shoot ray into scene, detect hit
                 {
 
-                    Tower tower = hit.collider.GetComponent<Tower>();
+                    TowerController tower = hit.collider.GetComponentInParent<TowerController>();
                     if(tower != null)
                     {
                         //if (currentlySelectedTower != null) currentlySelectedTower.EndSelect();
@@ -127,7 +127,7 @@ namespace Wiles
                 if (IsValidGridCoords(grid))
                 {
 
-                    Tower existingTower = LookupTower(grid);
+                    TowerController existingTower = LookupTower(grid);
 
                     if (existingTower == null)
                     {
@@ -135,7 +135,7 @@ namespace Wiles
                         // CHECK AI NAVIGATION PATHS
                         if (currentTowerToBuy != null)
                         {
-                            Tower tower = Instantiate(currentTowerToBuy, gridHelper.position, Quaternion.identity);
+                            TowerController tower = Instantiate(currentTowerToBuy, gridHelper.position, Quaternion.identity);
                             towers[grid.x, grid.y] = tower;
                         }
                     }
@@ -145,7 +145,7 @@ namespace Wiles
             }
         }
 
-        private Tower LookupTower(GridCoords grid)
+        private TowerController LookupTower(GridCoords grid)
         {
             if (!IsValidGridCoords(grid)) return null;
 

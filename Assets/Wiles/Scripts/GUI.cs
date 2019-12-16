@@ -14,9 +14,9 @@ namespace Wiles
         //string currentTowerToBuy = "Tower Name";
         //string playSpeed = "||>  |>  |>|>";
 
-        public Tower basicZapTower;
-        public Tower basicProjectileTower;
-        public Tower iceTower;
+        public TowerController basicZapTower;
+        public TowerController basicProjectileTower;
+        public TowerController iceTower;
 
         public Text totalHealth;
         public Text money;

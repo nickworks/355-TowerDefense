@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3305554387844809634}
   - component: {fileID: 3305554387844809694}
   - component: {fileID: 3535951528996593798}
-  - component: {fileID: 5245401221801332306}
+  - component: {fileID: 3103136664011246871}
   m_Layer: 9
   m_Name: Tower_BasicProjectile
   m_TagString: Untagged
@@ -121,11 +121,11 @@ SphereCollider:
   m_GameObject: {fileID: 3305554387844809635}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 2.28
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5245401221801332306
+--- !u!114 &3103136664011246871
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,7 +141,17 @@ MonoBehaviour:
   attackRange: 8
   attackSpeed: 0.8
   attackDamage: 77
-  frozenMat: {fileID: 2100000, guid: ce836e437de187647829f9d1ea434bbd, type: 2}
+  justFrozen: 0
+  isFrozen: 0
+  freezeDuration: 4
+  atkTimer: 0
+  frozenTimer: 0
+  mesh: {fileID: 0}
+  defMat: {fileID: 0}
+  frozenMat: {fileID: 0}
+  currentAttack: 1
+  projectile: {fileID: 7921106041305014229, guid: 1766ea72086652e47804465f714b40d5,
+    type: 3}
 --- !u!1 &3390845945130146819
 GameObject:
   m_ObjectHideFlags: 0
