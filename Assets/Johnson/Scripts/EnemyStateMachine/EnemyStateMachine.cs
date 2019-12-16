@@ -36,8 +36,8 @@ namespace Johnson
         public float attackDamage = 25; // attack damage of the enemy
 
         public bool isUnfrozen = true;
-        float frozenTimer = 1.0f;
-        float frozenTimerMax = 1.0f;
+        float frozenTimer = .5f;
+        float frozenTimerMax = .5f;
 
 
         [HideInInspector]

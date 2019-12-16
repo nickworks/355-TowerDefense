@@ -9,27 +9,27 @@ namespace Johnson
 {
     public class LightningTowerStateMachine : MonoBehaviour
     {
-        LightningTowerState currentState;
-        
-        public float attackCooldown = 0.5f;
-        public float attackDamage = 25;
+        LightningTowerState currentState; // the currrent state of the enemy
+
+        public float attackCooldown = 0.5f; // cooldown time for attacks
+        public float attackDamage = 25; // attack damage of the tower
 
         [HideInInspector]
         public float timeBetweenShots = .5f; // this holds the time that the boss has to wait before firing again
         [HideInInspector]
         public float timeUntilNextShot = 2; // this hold the time until the next shot
         [HideInInspector]
-        public EnemyStateMachine enemy;
+        public EnemyStateMachine enemy; // hold a copy of the enemy
 
-        List<EnemyStateMachine> enemies = new List<EnemyStateMachine>();
-
-        [HideInInspector]
-        public float timerAttackCooldown = 0;
+        List<EnemyStateMachine> enemies = new List<EnemyStateMachine>(); // this is a special array that holds all the enemies on scene
 
         [HideInInspector]
-        public Transform attackTarget { get; private set; }
-        
-        Vector3 vectorToTarget;
+        public float timerAttackCooldown = 0; // current time for the attacks cooldown
+
+        [HideInInspector]
+        public Transform attackTarget { get; private set; }  // gets the position of the current attack target
+
+        Vector3 vectorToTarget; // line to target
 
         // Start is called before the first frame update
         void Start()
@@ -47,15 +47,25 @@ namespace Johnson
             if (currentState != null) SwitchToState(currentState.Update(this));
         }
 
+        /// <summary>
+        /// this is the start function for the selector mechanic in the game... i broke it and haven't fixed it
+        /// </summary>
         public void StartSelect()
         {
             GetComponent<MeshRenderer>().material.color = Color.white;
         }
+        /// <summary>
+        /// end function for the selector
+        /// </summary>
         public void EndSelect()
         {
-            GetComponent<MeshRenderer>().material.color = Color.red;
+            GetComponent<MeshRenderer>().material.color = Color.yellow;
         }
 
+        /// <summary>
+        /// This function controls the switching of states
+        /// </summary>
+        /// <param name="newState">Passes in a copy of the state class to be filled with the info from the newState</param>
         private void SwitchToState(LightningTowerState newState)
         {
             if (newState != null)
@@ -66,6 +76,10 @@ namespace Johnson
             }
         }
 
+        /// <summary>
+        /// This function activates when something enters the trigger collider
+        /// </summary>
+        /// <param name="collider">the collider of the object that entered the trigger is passed into the param</param>
         void OnTriggerEnter(Collider collider)
         {
             EnemyStateMachine e = collider.GetComponent<EnemyStateMachine>();
@@ -82,6 +96,11 @@ namespace Johnson
             }
 
         }
+
+        /// <summary>
+        /// This function activates when something stays in the trigger collider
+        /// </summary>
+        /// <param name="collider">the collider of the object that entered the trigger is passed into the param</param>
         private void OnTriggerStay(Collider collider)
         {
             EnemyStateMachine e = collider.GetComponent<EnemyStateMachine>();
@@ -92,6 +111,11 @@ namespace Johnson
                 if (attackTarget != null) SwitchToState(new LightningTowerStateShoot());
             }
         }
+
+        /// <summary>
+        /// This function activates when something exits in the trigger collider
+        /// </summary>
+        /// <param name="collider">the collider of the object that entered the trigger is passed into the param</param>
         void OnTriggerExit(Collider collider)
         {
             EnemyStateMachine e = collider.GetComponent<EnemyStateMachine>();

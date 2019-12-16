@@ -8,7 +8,7 @@ using UnityEngine;
 namespace Johnson
 {
     /// <summary>
-    /// This class/State handles when the enemies die
+    /// This class/State handles the attack of the enemy
     /// </summary>
     public class EnemyStateAttack : EnemyState
     {
